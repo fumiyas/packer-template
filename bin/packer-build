@@ -1,0 +1,90 @@
+#!/bin/zsh
+##
+## My Packer templates and build script
+## Copyright (c) 2015 SATOH Fumiyasu @ OSS Technology Corp., Japan
+##
+## License: GNU General Public License version 3
+##
+
+emulate -R ksh
+set -u
+set -o pipefail
+umask 0077
+
+pdie() {
+  echo "$0: ERROR: $1"
+  exit 1
+}
+
+run() {
+  echo "Run: $*" 1>&2
+  "$@"
+}
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 CONFFILE"
+  exit 1
+fi
+
+base_dir="$(cd "${0%/*}/.." && echo "$PWD")" || exit 1
+build_dir="$base_dir/build"
+template_dir="$base_dir/template"
+iso_dir="$base_dir/iso"
+
+conf="$1"; shift
+
+## ======================================================================
+
+. "$conf" || exit 1
+
+template_build_conf="$template_dir/$box_template/build.conf"
+
+. "$template_build_conf" || exit 1
+
+build_dir="$base_dir/build/$box_name"
+
+## ----------------------------------------------------------------------
+
+typeset -A vars
+vars=(
+  iso_dir	"$iso_dir"
+)
+
+sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "$conf" "$template_build_conf" \
+|sort -u \
+|while read var_name; do
+  [[ $var_name == "box_template" ]] && continue
+  eval "vars[$var_name]=\"\$$var_name\""
+done
+
+## ======================================================================
+
+trap 'rm -rf "$build_dir"' EXIT
+mkdir -p "$build_dir" || exit 1
+cd "$build_dir" || exit 1
+
+cp -rp "$template_dir/$box_template"/* . || exit 1
+#ln -s . http || exit 1
+
+(
+  echo '{'
+  for var_name in "${!vars[@]}"; do
+    printf '  "%s": "%s",\n' "$var_name" "${vars[$var_name]}"
+  done
+  echo '  "#": "END"'
+  echo '}'
+) \
+|tee \
+  -a /dev/stderr \
+  >packer.var.json \
+;
+
+run packer \
+  build \
+  -var-file=packer.var.json \
+  packer.json \
+  2>&1 \
+|tee \
+  packer.log \
+;
+

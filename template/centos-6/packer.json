@@ -1,0 +1,109 @@
+{
+  "variables": {
+    "box_name": "CentOS-6",
+    "os_name": "CentOS",
+    "os_version_major": "6",
+    "os_version_minor": "0",
+    "os_arch": "x86_64",
+    "http_directory": ".",
+    "iso_dir": "../../iso",
+    "iso_url_prefix": "http://vault.centos.org/",
+    "iso_variant": "minimal",
+    "iso_checksum": "",
+    "iso_checksum_type": "none",
+    "vm_cpus": "1",
+    "vm_memory_size": "1024",
+    "vm_disk_size": "40000",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
+    "ssh_wait_timeout": "10m",
+    "shutdown_command": "sudo poweroff",
+    "#": "#"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "sudo env {{.Vars}} bash -uex '{{.Path}}'",
+      "override": {
+	"virtualbox-iso": {
+	  "scripts": [
+	    "scripts/setup.sh",
+	    "scripts/vagrant.sh",
+	    "scripts/virtualbox.sh",
+	    "scripts/cleanup.sh"
+	  ]
+	},
+	"vmware-iso": {
+	  "scripts": [
+	    "scripts/setup.sh",
+	    "scripts/vagrant.sh",
+	    "scripts/vmware.sh",
+	    "scripts/cleanup.sh"
+	  ]
+	}
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{user `box_name`}}.{{.Provider}}.box"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "RedHat_64",
+      "virtualbox_version_file": ".vbox_version",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
+        ["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"]
+      ],
+
+      "vm_name": "{{user `box_name`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
+        "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+      ],
+      "boot_command": [
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}"
+    },
+    {
+      "type": "vmware-iso",
+      "guest_os_type": "centos-64",
+      "tools_upload_flavor": "linux",
+      "vmx_data": {
+        "vhv.enable": "TRUE",
+        "numvcpus": "1",
+        "cpuid.coresPerSocket": "{{user `vm_cpus`}}",
+        "memsize": "{{user `vm_memory_size`}}"
+      },
+
+      "vm_name": "{{user `box_name`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
+        "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+      ],
+      "boot_command": [
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}"
+    }
+  ]
+}
+
