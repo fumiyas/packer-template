@@ -59,12 +59,13 @@ done
 
 ## ======================================================================
 
-trap 'rm -rf "$build_dir"' EXIT
+#trap 'rm -rf "$build_dir"' EXIT
 mkdir -p "$build_dir" || exit 1
 cd "$build_dir" || exit 1
 
 cp -rp "$template_dir/$box_template"/* . || exit 1
-#ln -s . http || exit 1
+
+ssh-keygen -t rsa -b 4096 -N '' -f id_rsa
 
 (
   echo '{'
