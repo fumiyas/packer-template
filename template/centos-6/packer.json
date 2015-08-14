@@ -28,7 +28,7 @@
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
-	    "scripts/setup.sh",
+	    "scripts/yum.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/virtualbox.sh",
@@ -37,7 +37,7 @@
 	},
 	"vmware-iso": {
 	  "scripts": [
-	    "scripts/setup.sh",
+	    "scripts/yum.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/vmware.sh",

@@ -9,7 +9,6 @@ sed -i.dist \
   /etc/ssh/sshd_config \
 ;
 
-umask 0022
 mkdir /etc/skel/.ssh
 touch /etc/skel/.ssh/authorized_keys
 
