@@ -18,13 +18,13 @@
     "ssh_username": "root",
     "ssh_password": "root",
     "ssh_wait_timeout": "10m",
-    "shutdown_command": "sudo poweroff",
+    "shutdown_command": "poweroff",
     "#": "#"
   },
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "sudo env {{.Vars}} bash -uex '{{.Path}}'",
+      "execute_command": "env {{.Vars}} LANG=C bash -uex '{{.Path}}'",
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
