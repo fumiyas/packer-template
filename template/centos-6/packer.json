@@ -1,12 +1,12 @@
 {
   "variables": {
     "box_name": "CentOS-6",
+    "headless": "false",
+    "http_directory": ".",
     "os_name": "CentOS",
     "os_version_major": "6",
     "os_version_minor": "0",
     "os_arch": "x86_64",
-    "headless": "false",
-    "http_directory": ".",
     "iso_dir": "../../iso",
     "iso_url_prefix": "http://vault.centos.org/",
     "iso_variant": "minimal",
