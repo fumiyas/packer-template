@@ -66,8 +66,6 @@ cd "$box_build_dir" || exit 1
 
 cp -rp "$template_dir/$box_template"/* . || exit 1
 
-ssh-keygen -t rsa -b 4096 -C '' -N '' -f id_rsa
-
 (
   echo '{'
   for var_name in "${!vars[@]}"; do
