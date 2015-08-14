@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+umask 0022
+
 VBOX_VERSION=$(cat ~root/.vbox_version)
 
 yum -y install \
