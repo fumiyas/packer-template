@@ -2,10 +2,10 @@
 
 LC_TIME=C date >/etc/vagrant_box_build_time
 
-groupadd vagrant
-useradd -g vagrant -d /home/vagrant -s /bin/bash -m vagrant
+groupadd --system vagrant
+useradd --system -g vagrant -d /srv/vagrant -s /bin/bash -m vagrant
 
-echo "umask 022" >>/home/vagrant/.bashrc
+echo "umask 022" >>/srv/vagrant/.bashrc
 echo "Defaults:vagrant !requiretty" >/etc/sudoers.d/vagrant
 echo "vagrant ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers.d/vagrant
 
