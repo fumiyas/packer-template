@@ -66,8 +66,12 @@
       "guest_os_type": "{{user `os_type_vbox`}}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
-        ["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"]
+	["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
+	["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"],
+	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype4", "virtio"]
       ],
       "disk_size": "{{user `vm_disk_size`}}",
 
@@ -76,7 +80,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
-        "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
@@ -94,10 +98,10 @@
       "guest_os_type": "{{user `os_type_vmware`}}",
       "tools_upload_flavor": "linux",
       "vmx_data": {
-        "vhv.enable": "TRUE",
-        "numvcpus": "1",
-        "cpuid.coresPerSocket": "{{user `vm_cpus`}}",
-        "memsize": "{{user `vm_memory_size`}}"
+	"vhv.enable": "TRUE",
+	"numvcpus": "1",
+	"cpuid.coresPerSocket": "{{user `vm_cpus`}}",
+	"memsize": "{{user `vm_memory_size`}}"
       },
       "disk_size": "{{user `vm_disk_size`}}",
 
@@ -106,7 +110,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
-        "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
