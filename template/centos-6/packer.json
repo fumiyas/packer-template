@@ -3,6 +3,9 @@
     "box_name": "CentOS-6",
     "headless": "false",
     "http_directory": ".",
+    "boot_wait": "10s",
+    "os_type_vbox": "RedHat_64",
+    "os_type_vmware": "centos-64",
     "os_name": "CentOS",
     "os_version_major": "6",
     "os_version_minor": "0",
@@ -60,7 +63,7 @@
       "type": "virtualbox-iso",
       "headless": "{{user `headless`}}",
       "virtualbox_version_file": ".vbox_version",
-      "guest_os_type": "RedHat_64",
+      "guest_os_type": "{{user `os_type_vbox`}}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
@@ -75,6 +78,7 @@
 	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
         "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
       ],
+      "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
 	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
       ],
@@ -87,7 +91,7 @@
     {
       "type": "vmware-iso",
       "headless": "{{user `headless`}}",
-      "guest_os_type": "centos-64",
+      "guest_os_type": "{{user `os_type_vmware`}}",
       "tools_upload_flavor": "linux",
       "vmx_data": {
         "vhv.enable": "TRUE",
@@ -95,6 +99,7 @@
         "cpuid.coresPerSocket": "{{user `vm_cpus`}}",
         "memsize": "{{user `vm_memory_size`}}"
       },
+      "disk_size": "{{user `vm_disk_size`}}",
 
       "vm_name": "{{user `box_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -103,6 +108,7 @@
 	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
         "{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
       ],
+      "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
 	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
       ],
