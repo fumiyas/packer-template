@@ -11,6 +11,9 @@ set -o pipefail
 shopt -s lastpipe
 umask 0077
 
+tab=$'\n'
+lf=$'\n'
+
 pdie() {
   echo "$0: ERROR: $1"
   exit 1
@@ -73,7 +76,10 @@ cp -rp "$template_dir/$box_template"/* . || exit 1
   done \
   |sort \
   |while read var_name; do
-    printf '  "%s": "%s",\n' "$var_name" "${vars[$var_name]}"
+    var="${vars[$var_name]//\"/\\\"}"
+    var="${var//$tab/\\t}"
+    var="${var//$lf/\\n}"
+    printf '  "%s": "%s",\n' "$var_name" "$var"
   done
   echo '  "#": "END"'
   echo '}'
