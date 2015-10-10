@@ -19,12 +19,14 @@
     "ssh_password": "root",
     "ssh_wait_timeout": "10m",
     "shutdown_command": "poweroff",
+    "provisioner_shell": "bash -uex",
+    "provisioner_shell_trap": "sleep 3600",
     "#": "#"
   },
   "provisioners": [
     {
       "type": "shell",
-      "execute_command": "env {{.Vars}} LANG=C bash -uex '{{.Path}}'",
+      "execute_command": "export LC_ALL=C {{.Vars}}; {{user `provisioner_shell`}} '{{.Path}}'; ret=$?; [ $ret -ne 0 ] && { echo \"Shell provisioner failed: Exit code $ret\" >&2; set -x; {{user `provisioner_shell_trap`}}; }; exit $ret",
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
