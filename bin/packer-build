@@ -44,7 +44,8 @@ template_build_conf="$template_dir/$box_template/build.conf"
 
 . "$template_build_conf" || exit 1
 
-box_build_dir="$build_dir/$box_name"
+box_build_dir="$build_dir/$box_name.$$.tmp"
+packer_build_name="packer-build.$box_name"
 
 ## ----------------------------------------------------------------------
 
@@ -66,6 +67,8 @@ trap 'rm -rf "$box_build_dir"' EXIT
 mkdir -p "$build_dir" || exit 1
 mkdir "$box_build_dir" || exit 1
 cd "$box_build_dir" || exit 1
+mkdir "$packer_build_name" || exit 1
+cd "$packer_build_name" || exit 1
 
 cp -rp "$template_dir/$box_template"/* . || exit 1
 
@@ -96,6 +99,10 @@ run packer \
   packer-build.log \
 ;
 
-mv "$box_name".*.box ..
-tar cf ../"$box_name".packer.tar *
+mv "$box_name".*.box ../.. || exit 1
+rm -r packer_cache || exit 1
+cd .. || exit 1
+tar cf ../"$packer_build_name.tar" "$packer_build_name" || exit 1
+
+exit 0
 
