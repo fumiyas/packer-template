@@ -12,7 +12,6 @@ yum -y install \
   make \
   gcc \
   perl \
-  bzip2 \
 ;
 
 mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
