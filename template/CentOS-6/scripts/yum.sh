@@ -3,7 +3,9 @@
 set -u
 umask 0022
 
-baseurl="http://vault.centos.org/\$releasever/os/\$basearch/\n\
+baseurl="\n\
+  http://centos.data-hotel.net/pub/linux/centos/\$releasever/os/\$basearch/\n\
+  http://vault.centos.org/\$releasever/os/\$basearch/\n\
   http://archive.kernel.org/centos/\$releasever/os/\$basearch/"
 
 mkdir -p /etc/yum/vars
