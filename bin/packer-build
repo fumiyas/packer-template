@@ -40,10 +40,6 @@ conf="$1"; shift
 
 . "$conf" || exit 1
 
-template_build_conf="$template_dir/$box_template/build.conf"
-
-. "$template_build_conf" || exit 1
-
 box_build_dir="$build_dir/$box_name.$$.tmp"
 packer_build_name="packer-build.$box_name"
 
@@ -54,7 +50,7 @@ vars=(
   [iso_dir]="$iso_dir"
 )
 
-sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "$conf" "$template_build_conf" \
+sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "$conf" \
 |sort -u \
 |while read var_name; do
   [[ $var_name == "box_template" ]] && continue
