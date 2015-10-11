@@ -105,6 +105,7 @@ run "${packer_build[@]}" \
 2>&1 \
 |tee \
   packer-build.log \
+|| exit 1 \
 ;
 
 mv "$box_name".*.box ../.. || exit 1
