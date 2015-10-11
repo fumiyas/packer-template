@@ -90,11 +90,19 @@ cp -rp "$template_dir/$box_template"/* . || exit 1
 >packer.var.json \
 ;
 
-run packer \
-  build \
-  -var-file=packer.var.json \
-  packer.json \
-  2>&1 \
+typeset -a packer_build=(
+  packer
+    build
+    -var-file=packer.var.json
+    packer.json
+)
+
+echo '#!/bin/sh' >packer-build.sh || exit 1
+echo -E "${packer_build[*]}" >>packer-build.sh || exit 1
+chmod +x packer-build.sh || exit 1
+
+run "${packer_build[@]}" \
+2>&1 \
 |tee \
   packer-build.log \
 ;
