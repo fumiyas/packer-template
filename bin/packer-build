@@ -101,7 +101,9 @@ echo '#!/bin/sh' >packer-build.sh || exit 1
 echo -E "${packer_build[*]}" >>packer-build.sh || exit 1
 chmod +x packer-build.sh || exit 1
 
-run "${packer_build[@]}" \
+run \
+  env PACKER_CACHE_DIR="$iso_dir" \
+  "${packer_build[@]}" \
 2>&1 \
 |tee \
   packer-build.log \
@@ -109,7 +111,6 @@ run "${packer_build[@]}" \
 ;
 
 mv "$box_name".*.box ../.. || exit 1
-rm -r packer_cache || exit 1
 cd .. || exit 1
 tar cf ../"$packer_build_name.tar" "$packer_build_name" || exit 1
 
