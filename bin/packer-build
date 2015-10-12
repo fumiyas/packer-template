@@ -103,6 +103,7 @@ run \
 2>&1 \
 |tee \
   packer-build.log \
+  "../../$box_name.packer-build.log" \
 || exit 1 \
 ;
 
