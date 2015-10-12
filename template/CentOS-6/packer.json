@@ -37,7 +37,8 @@
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/virtualbox.sh",
-	    "scripts/cleanup.sh"
+	    "scripts/cleanup.sh",
+	    "scripts/info.sh"
 	  ]
 	},
 	"vmware-iso": {
@@ -46,7 +47,8 @@
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/vmware.sh",
-	    "scripts/cleanup.sh"
+	    "scripts/cleanup.sh",
+	    "scripts/info.sh"
 	  ]
 	}
       }
