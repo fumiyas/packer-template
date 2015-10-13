@@ -76,6 +76,7 @@
 	["modifyvm", "{{.Name}}", "--nictype4", "virtio"]
       ],
       "disk_size": "{{user `vm_disk_size`}}",
+      "hard_drive_interface": "sata",
 
       "vm_name": "{{user `box_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
