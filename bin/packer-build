@@ -104,7 +104,7 @@ run \
 |tee \
   packer-build.log \
   "../../$box_name.packer-build.log" \
-|| exit 1 \
+|| : \
 ;
 
 mv "$box_name".*.box ../.. || exit 1
