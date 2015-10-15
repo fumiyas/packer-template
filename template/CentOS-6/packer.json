@@ -33,7 +33,7 @@
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
-	    "scripts/yum.sh",
+	    "scripts/yum-releaselock.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/virtualbox.sh",
@@ -43,7 +43,7 @@
 	},
 	"vmware-iso": {
 	  "scripts": [
-	    "scripts/yum.sh",
+	    "scripts/yum-releaselock.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/vmware.sh",
