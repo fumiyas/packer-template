@@ -11,6 +11,7 @@ set -o pipefail
 shopt -s lastpipe
 umask 0077
 
+id="$(date +%Y%m%d%H%M).$$"
 tab=$'\n'
 lf=$'\n'
 
@@ -40,7 +41,7 @@ conf="$1"; shift
 
 . "$conf" || exit 1
 
-box_build_dir="$build_dir/$box_name.$$.tmp"
+box_build_dir="$build_dir/$box_name.$id.tmp"
 packer_build_name="packer-build.$box_name"
 
 ## ----------------------------------------------------------------------
@@ -103,7 +104,7 @@ run \
 2>&1 \
 |tee \
   packer-build.log \
-  "../../$box_name.packer-build.log" \
+  "../../$box_name.packer-build.$id.log" \
 || : \
 ;
 
