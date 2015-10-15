@@ -6,7 +6,7 @@ umask 0022
 baseurl="\n\
   http://centos.data-hotel.net/pub/linux/centos/\$releasever/os/\$basearch/\n\
   http://vault.centos.org/\$releasever/os/\$basearch/\n\
-  http://archive.kernel.org/centos/\$releasever/os/\$basearch/"
+  http://archive.kernel.org/centos-vault/\$releasever/os/\$basearch/"
 
 mkdir -p /etc/yum/vars
 sed 's/ *(.*//;s/.* //' /etc/redhat-release >/etc/yum/vars/releasever
