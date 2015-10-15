@@ -73,12 +73,14 @@
 	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
-	["modifyvm", "{{.Name}}", "--nictype4", "virtio"]
+	["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
+	["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"]
       ],
       "disk_size": "{{user `vm_disk_size`}}",
       "hard_drive_interface": "sata",
 
       "vm_name": "{{user `box_name`}}",
+      "iso_interface": "sata",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
