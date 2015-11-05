@@ -5,14 +5,24 @@ umask 0022
 
 VBOX_VERSION=$(cat ~root/.vbox_version)
 
-yum -y install \
-  --disablerepo='*' \
-  --enablerepo='base' \
-  kernel-devel \
-  make \
-  gcc \
-  perl \
-;
+if [[ /etc/yum.repos.d/epel.repo ]]; then
+  yum -y install \
+    --disablerepo='*' \
+    --enablerepo='base' \
+    --enablerepo='epel' \
+    dkms \
+    perl \
+  ;
+else
+  yum -y install \
+    --disablerepo='*' \
+    --enablerepo='base' \
+    kernel-devel \
+    make \
+    gcc \
+    perl \
+  ;
+fi
 
 mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 /mnt/VBoxLinuxAdditions.run --nox11 || :
