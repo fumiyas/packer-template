@@ -24,6 +24,8 @@ else
   ;
 fi
 
+chkconfig dkms_autoinstaller on
+
 mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 /mnt/VBoxLinuxAdditions.run --nox11 || :
 umount /mnt
