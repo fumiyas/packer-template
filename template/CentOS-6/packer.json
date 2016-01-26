@@ -33,7 +33,7 @@
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
-	    "scripts/yum-releaselock.sh",
+	    "scripts/yum.sh",
 	    "scripts/epel.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
