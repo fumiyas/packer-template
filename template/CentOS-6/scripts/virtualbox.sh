@@ -31,3 +31,12 @@ mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 umount /mnt
 rm -f ~root/VBoxGuestAdditions_$VBOX_VERSION.iso
 
+sed -i.dist \
+  -e 's/^\(BUILT_MODULE_\)/#\1/' \
+  /usr/src/vboxguest-*/dkms.conf \
+;
+sed -i.dist \
+  -e 's/\(obj-m =.*\) vboxvideo\//\1/' \
+  /usr/src/vboxguest-*/Makefile \
+;
+
