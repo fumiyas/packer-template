@@ -18,7 +18,7 @@ vault_baseurl="\n\
 mkdir -p /etc/yum.repos.d/dist
 cp -a /etc/yum.repos.d/CentOS-*.repo /etc/yum.repos.d/dist
 
-sed -i \
+sed \
   -e "s/^\[/[C$el_ver_major-/" \
   -e '/^enabled=/d' \
   -e 's/^gpgcheck=.*/&\nenabled=0/' \
@@ -27,7 +27,7 @@ sed -i \
   </etc/yum.repos.d/dist/CentOS-Base.repo \
   >/etc/yum.repos.d/CentOS-Base-Latest.repo \
 ;
-sed -i \
+sed \
   -e 's!^mirrorlist=!#&!' \
   -e "s!^#*\(baseurl=\).*!\1$vault_baseurl!" \
   </etc/yum.repos.d/dist/CentOS-Base.repo \
