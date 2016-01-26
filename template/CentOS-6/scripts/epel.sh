@@ -7,10 +7,10 @@ set -u
 set -e
 
 epel_url_prefix="http://download.fedoraproject.org/pub/epel"
-el_ver=$(lsb_release -r |sed 's/^.*\s//;s/\..*//')
+el_ver_major=$(lsb_release -r |sed 's/^.*\s//;s/\..*//')
 el_arch=$(uname -m)
 
-epel_url="$epel_url_prefix/$el_ver/$el_arch"
+epel_url="$epel_url_prefix/$el_ver_major/$el_arch"
 
 epel_release_url=$(
   curl \
