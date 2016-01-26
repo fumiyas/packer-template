@@ -3,7 +3,7 @@
 set -u
 umask 0022
 
-el_ver=$(lsb_release -r |sed 's/^.*\s//')
+el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 el_ver_major="${el_ver%%.*}"
 
 latest_baseurl="\n\
