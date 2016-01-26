@@ -16,12 +16,12 @@ vault_baseurl="\n\
   http://archive.kernel.org/centos-vault/\$releasever/os/\$basearch/"
 
 mkdir -p /etc/yum.repos.d/dist
-cp -a /etc/yum.repos.d/*.repo /etc/yum.repos.d/dist
+cp -a /etc/yum.repos.d/CentOS-*.repo /etc/yum.repos.d/dist
 
 sed -i \
   -e "s/^\[/[C$el_ver_major-/" \
   -e '/^enabled=/d' \
-   -e 's/^gpgcheck=.*/&\nenabled=0/' \
+  -e 's/^gpgcheck=.*/&\nenabled=0/' \
   -e 's!^mirrorlist=!#&!' \
   -e "s!^#*\(baseurl=\).*!\1$latest_baseurl!" \
   </etc/yum.repos.d/dist/CentOS-Base.repo \

@@ -28,5 +28,12 @@ fi
 
 rpm -iv "$epel_release_url"
 
-sed -i.dist 's/^enabled=.*/enabled=0/' /etc/yum.repos.d/epel{,-*}.repo
+mkdir -p /etc/yum.repos.d/dist
+cp -a /etc/yum.repos.d/epel{,-*}.repo /etc/yum.repos.d/dist/
+
+sed -i \
+  -e '/^enabled=/d' \
+  -e 's/^gpgcheck=.*/&\nenabled=0/' \
+  /etc/yum.repos.d/epel{,-*}.repo \
+;
 
