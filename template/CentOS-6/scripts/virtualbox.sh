@@ -10,13 +10,16 @@ if [[ /etc/yum.repos.d/epel.repo ]]; then
     --disablerepo='*' \
     --enablerepo='base' \
     --enablerepo='epel' \
+    bzip2 \
     dkms \
+    make \
     perl \
   ;
 else
   yum -y install \
     --disablerepo='*' \
     --enablerepo='base' \
+    bzip2 \
     kernel-devel \
     make \
     gcc \
