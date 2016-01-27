@@ -1,0 +1,135 @@
+{
+  "variables": {
+    "box_name": "CentOS-7",
+    "headless": "false",
+    "http_directory": ".",
+    "boot_wait": "10s",
+    "os_type_vbox": "RedHat_64",
+    "os_type_vmware": "centos-64",
+    "os_name": "CentOS",
+    "os_version_major": "7",
+    "os_version_minor": "0",
+    "os_version_micro": "1406",
+    "os_arch": "x86_64",
+    "iso_dir": "../../iso",
+    "iso_url_prefix": "http://vault.centos.org/",
+    "iso_variant": "Minimal",
+    "iso_checksum": "",
+    "iso_checksum_type": "none",
+    "vm_cpus": "1",
+    "vm_memory_size": "1024",
+    "vm_disk_size": "40000",
+    "ssh_username": "root",
+    "ssh_password": "root",
+    "ssh_wait_timeout": "10m",
+    "shutdown_command": "poweroff",
+    "provisioner_shell": "bash -uex",
+    "provisioner_shell_trap": "sleep 3600",
+    "#": "#"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "export LC_ALL=C {{.Vars}}; {{user `provisioner_shell`}} '{{.Path}}'; ret=$?; [ $ret -ne 0 ] && { echo \"Shell provisioner failed: Exit code $ret\" >&2; set -x; {{user `provisioner_shell_trap`}}; }; exit $ret",
+      "override": {
+	"virtualbox-iso": {
+	  "scripts": [
+	    "scripts/yum.sh",
+	    "scripts/epel.sh",
+	    "scripts/ssh.sh",
+	    "scripts/vagrant.sh",
+	    "scripts/virtualbox.sh",
+	    "scripts/cleanup.sh",
+	    "scripts/info.sh"
+	  ]
+	},
+	"vmware-iso": {
+	  "scripts": [
+	    "scripts/yum.sh",
+	    "scripts/epel.sh",
+	    "scripts/ssh.sh",
+	    "scripts/vagrant.sh",
+	    "scripts/vmware.sh",
+	    "scripts/cleanup.sh",
+	    "scripts/info.sh"
+	  ]
+	}
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{user `box_name`}}.{{.Provider}}.box"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "headless": "{{user `headless`}}",
+      "virtualbox_version_file": ".vbox_version",
+      "guest_os_type": "{{user `os_type_vbox`}}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "vboxmanage": [
+	["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
+	["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"],
+	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
+	["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"]
+      ],
+      "disk_size": "{{user `vm_disk_size`}}",
+      "hard_drive_interface": "sata",
+
+      "vm_name": "{{user `box_name`}}",
+      "iso_interface": "sata",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso",
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso"
+      ],
+      "boot_wait": "{{user `boot_wait`}}",
+      "boot_command": [
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}"
+    },
+    {
+      "type": "vmware-iso",
+      "headless": "{{user `headless`}}",
+      "guest_os_type": "{{user `os_type_vmware`}}",
+      "tools_upload_flavor": "linux",
+      "vmx_data": {
+	"vhv.enable": "TRUE",
+	"numvcpus": "1",
+	"cpuid.coresPerSocket": "{{user `vm_cpus`}}",
+	"memsize": "{{user `vm_memory_size`}}"
+      },
+      "disk_size": "{{user `vm_disk_size`}}",
+
+      "vm_name": "{{user `box_name`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+      ],
+      "boot_wait": "{{user `boot_wait`}}",
+      "boot_command": [
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}"
+    }
+  ]
+}
+
