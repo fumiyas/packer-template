@@ -21,7 +21,7 @@ cp -a /etc/yum.repos.d/CentOS-*.repo /etc/yum.repos.d/dist
 
 sed \
   -e 's!^mirrorlist=!#&!' \
-  -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$vault_baseurl  \2!" \
+  -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$vault_baseurl!" \
   </etc/yum.repos.d/dist/CentOS-Base.repo \
   >/etc/yum.repos.d/CentOS-Base.repo \
 ;
@@ -31,7 +31,7 @@ sed \
   -e '/^enabled=/d' \
   -e 's/^gpgcheck=.*/&\nenabled=0/' \
   -e 's!^mirrorlist=!#&!' \
-  -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$latest_baseurl  \2!" \
+  -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$latest_baseurl!" \
   </etc/yum.repos.d/dist/CentOS-Base.repo \
   >/etc/yum.repos.d/CentOS-Base-Latest.repo \
 ;
