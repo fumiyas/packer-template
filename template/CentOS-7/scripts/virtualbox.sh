@@ -13,7 +13,6 @@ if [[ /etc/yum.repos.d/epel.repo ]]; then
     bzip2 \
     dkms \
     make \
-    perl \
   ;
 else
   yum -y install \
@@ -23,7 +22,6 @@ else
     kernel-devel \
     make \
     gcc \
-    perl \
   ;
 fi
 
