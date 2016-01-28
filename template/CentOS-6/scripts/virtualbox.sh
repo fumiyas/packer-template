@@ -34,8 +34,10 @@ mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 umount /mnt
 rm -f ~root/VBoxGuestAdditions_$VBOX_VERSION.iso
 
+## Building vboxvideo.ko fails with kernel-devel on CentOS 6,
+## thus remove it from the build target.
 sed -i.dist \
-  -e 's/^\(BUILT_MODULE_\)/#\1/' \
+   -e '/^BUILT_MODULE_NAME\[[0-9]*\]="vboxvideo"/,/^\(BUILT_MODULE_NAME\[\|$\)/s/^/#/' \
   /usr/src/vboxguest-*/dkms.conf \
 ;
 sed -i.dist \
