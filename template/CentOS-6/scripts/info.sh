@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -x
+exec 1>&2
 
 uname -a
 lscpu
