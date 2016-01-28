@@ -23,7 +23,6 @@ iptables -nvL -t mangle
 iptables -nvL -t raw
 iptables -nvL -t security
 ip6tables -nvL -t filter
-ip6tables -nvL -t nat
 ip6tables -nvL -t mangle
 ip6tables -nvL -t raw
 ip6tables -nvL -t security
