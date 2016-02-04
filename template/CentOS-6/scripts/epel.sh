@@ -6,6 +6,13 @@
 set -u
 set -e
 
+el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
+if [[ ${el_ver#*.} -le 4 ]]; then
+  ## yum with nss-3.14.0.0-12.el6 (bundled in CentOS 6.4) fails
+  ## to connect to https://mirrors.fedoraproject.org
+  yum -y install --disablerepo='*' --enablerepo=updates nss
+fi
+
 epel_url_prefix="http://download.fedoraproject.org/pub/epel"
 el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 el_ver_major="${el_ver%%.*}"
