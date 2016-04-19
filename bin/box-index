@@ -30,7 +30,7 @@ box_latest_json=$(
 )
 
 if [[ -z $box_latest_json ]]; then
-  pdie "Not index.json file(s) for versions found: $box_dir/*/index.json"
+  pdie "No index.json file(s) for versions found: $box_dir/*/index.json"
 fi
 
 if [[ $box_index_json -nt $box_latest_json ]]; then
