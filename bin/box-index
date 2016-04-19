@@ -1,0 +1,65 @@
+#!/bin/bash
+##
+## Create index.json metadata for Vagrant box support
+## Copyright (c) 2015-2016 SATOH Fumiyasu @ OSS Technology Corp., Japan
+##
+## License: GNU General Public License version 3
+##
+
+set -u
+set -o pipefail
+shopt -s lastpipe
+
+pdie() {
+  echo "$0: ERROR: $1"
+  exit 1
+}
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 BOX_DIR"
+  exit 1
+fi
+
+box_dir="$1"; shift
+
+box_index_json="$box_dir/index.json"
+box_latest_json=$(
+  ls -- "$box_dir"/*/index.json 2>/dev/null \
+  |sort --reverse --version-sort \
+  |head -n1
+)
+
+if [[ -z $box_latest_json ]]; then
+  pdie "Not index.json file(s) for versions found: $box_dir/*/index.json"
+fi
+
+if [[ $box_index_json -nt $box_latest_json ]]; then
+  exit 0
+fi
+
+## ======================================================================
+
+{
+  jq \
+    --compact-output \
+    'del(.versions)' \
+    "$box_latest_json" \
+  |sed 's/}$/,/' \
+  ;
+
+  echo '"versions": ['
+  jq \
+    --compact-output \
+    '.versions|.[]' \
+    "$box_dir"/*/index.json \
+  |sed '$!s/$/,/' \
+  ;
+  echo ']'
+
+  echo '}'
+} |jq '.' >"$box_index_json"
+
+## ======================================================================
+
+exit 0
+
