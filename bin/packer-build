@@ -43,7 +43,7 @@ conf="$1"; shift
 ## ======================================================================
 
 if [[ -f $conf_default ]]; then
-  . "$conf_default" || exit
+  . "$conf_default" || exit 1
 fi
 
 . "$conf" || exit 1
