@@ -9,7 +9,6 @@
 set -u
 set -o pipefail
 shopt -s lastpipe
-umask 0077
 
 id="$(date +%Y%m%d%H%M).$$"
 tab=$'\n'
