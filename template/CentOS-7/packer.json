@@ -104,7 +104,7 @@
       "type": "vmware-iso",
       "headless": "{{user `headless`}}",
       "guest_os_type": "{{user `os_type_vmware`}}",
-      "tools_upload_flavor": "linux",
+      "tools_upload_flavor": "",
       "vmx_data": {
 	"vhv.enable": "TRUE",
 	"numvcpus": "1",
