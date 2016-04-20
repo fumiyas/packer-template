@@ -9,11 +9,9 @@ yum -y install \
   fuse-libs \
 ;
 
-mount -o loop ~vagrant/linux.iso /mnt
-tar xzf /mnt/VMwareTools-*.tar.gz -C /tmp/
-umount /mnt
-rm ~vagrant/linux.iso
-
-/tmp/vmware-tools-distrib/vmware-install.pl -d
-rm -rf /tmp/vmware-tools-distrib
+yum -y install \
+  --disablerepo='*' \
+  --enablerepo='epel' \
+  open-vm-tools \
+;
 
