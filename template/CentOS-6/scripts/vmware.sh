@@ -11,7 +11,7 @@ yum -y install \
 
 yum -y install \
   --disablerepo='*' \
-  --enablerepo='epel' \
+  --enablerepo='base,epel' \
   open-vm-tools \
 ;
 
