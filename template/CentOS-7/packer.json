@@ -117,8 +117,8 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
-	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso",
-	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}-{{user `os_arch`}}-{{user `iso_variant`}}.iso"
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso",
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
