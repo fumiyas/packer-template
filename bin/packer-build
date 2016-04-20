@@ -35,6 +35,7 @@ dist_dir="$base_dir/dist"
 template_dir="$base_dir/template"
 iso_dir="$base_dir/iso"
 conf_default="$base_dir/etc/default.conf"
+conf_local="$base_dir/etc/local.conf"
 box_url_prefix="file://$dist_dir/"
 
 conf="$1"; shift
@@ -43,6 +44,9 @@ conf="$1"; shift
 
 if [[ -f $conf_default ]]; then
   . "$conf_default" || exit 1
+fi
+if [[ -f $conf_local ]]; then
+  . "$conf_local" || exit 1
 fi
 
 . "$conf" || exit 1
