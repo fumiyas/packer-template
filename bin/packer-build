@@ -29,6 +29,8 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
+packer="packer"
+packer_build_options=()
 base_dir="$(cd "${0%/*}/.." && echo "$PWD")" || exit 1
 build_dir="$base_dir/build"
 dist_dir="$base_dir/dist"
@@ -101,9 +103,10 @@ cp -rp "$template_dir/$box_template"/* . || exit 1
 ;
 
 typeset -a packer_build=(
-  packer
+  "$packer"
     build
     -var-file=packer.var.json
+    ${packer_build_options+"${packer_build_options[@]}"}
     packer.json
 )
 
