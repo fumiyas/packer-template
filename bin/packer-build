@@ -136,44 +136,40 @@ tar cf "$packer_build_name.tar" "$packer_build_name" || exit 1
 
 ## ----------------------------------------------------------------------
 
-cat <<EOF >"index.json"
-{
-  "name": "$box_name",
-  "description": "$box_name",
-  "versions": [{
-    "version": "$box_version",
-    "providers": [
-EOF
-
 boxes_json=""
 for box in *.box; do
   url="$box_url_prefix$box_name/$box_version/$box"
   sha1=$(sha1sum "$box" |sed 's/ .*//')
   provider="${box%.box}"; provider="${provider##*.}"
 
-  boxes_json+=${boxes_json:+$','}$(printf '
-      {
-	"name": "%s",
+  box_json=$(printf '      {
+	mname": "%s",
 	"url": "%s",
 	"checksum_type": "sha1",
 	"checksum": "%s"
-      }' "$provider" "$url" "$sha1"
+      }\n' "$provider" "$url" "$sha1"
   )
-done
 
-cat <<EOF >>"index.json"
-$boxes_json
+  cat <<EOF >"$provider.json"
+{
+  "name": "$box_name",
+  "description": "$box_name",
+  "versions": [{
+    "version": "$box_version",
+    "providers": [
+$box_json
     ]
   }]
 }
 EOF
+done
 
 ## ----------------------------------------------------------------------
 
 mkdir -p "$dist_ver_dir" || exit 1
 
 mv \
-  "index.json" \
+  *.json \
   "$box_name".*.box \
   "$packer_build_name.tar" \
   "$dist_ver_dir/" \
