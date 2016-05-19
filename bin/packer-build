@@ -75,7 +75,6 @@ done
 
 ## ======================================================================
 
-trap 'rm -rf "$box_build_dir"' EXIT
 mkdir -p "$build_dir" || exit 1
 mkdir "$box_build_dir" || exit 1
 cd "$box_build_dir" || exit 1
@@ -177,6 +176,8 @@ mv \
 ;
 
 ## ======================================================================
+
+rm -rf "$box_build_dir"
 
 exit 0
 
