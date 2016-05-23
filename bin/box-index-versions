@@ -1,40 +1,43 @@
 #!/bin/bash
 ##
-## Create index.json metadata for Vagrant box support
+## Vagrant Box: Create an index metadata from per-version metadata
 ## Copyright (c) 2015-2016 SATOH Fumiyasu @ OSS Technology Corp., Japan
 ##
 ## License: GNU General Public License version 3
 ##
 
 set -u
-set -o pipefail
-shopt -s lastpipe
+set -o pipefail || exit 1
+shopt -s lastpipe || exit 1
 
 pdie() {
   echo "$0: ERROR: $1"
   exit 1
 }
 
-if [[ $# -ne 1 ]]; then
-  echo "Usage: $0 BOX_DIR"
+## ======================================================================
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: $0 BOX.JSON ..."
   exit 1
 fi
 
-box_dir="$1"; shift
+box_json_files=("$@")
 
-box_index_json="$box_dir/index.json"
 box_latest_json=$(
-  ls -- "$box_dir"/*/index.json 2>/dev/null \
+  jq \
+    --compact-output \
+    '.versions | .[0] |[.version, input_filename]' \
+    "${box_json_files[@]}" \
+  |sed 's/^\["//;s/"\]$//;s/","/ /' \
   |sort --reverse --version-sort \
-  |head -n1
+  |head -n1 \
+  |sed 's/^[^ ]* //' \
+  ;
 )
 
 if [[ -z $box_latest_json ]]; then
-  pdie "No index.json file(s) for versions found: $box_dir/*/index.json"
-fi
-
-if [[ $box_index_json -nt $box_latest_json ]]; then
-  exit 0
+  pdie "No version found in per-version JSON files"
 fi
 
 ## ======================================================================
@@ -50,14 +53,14 @@ fi
   echo '"versions": ['
   jq \
     --compact-output \
-    '.versions|.[]' \
-    "$box_dir"/*/index.json \
+    '.versions |.[]' \
+    "${box_json_files[@]}" \
   |sed '$!s/$/,/' \
   ;
   echo ']'
 
   echo '}'
-} |jq '.' >"$box_index_json"
+} |jq '.'
 
 ## ======================================================================
 
