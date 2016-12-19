@@ -142,7 +142,7 @@ for box in *.box; do
   provider="${box%.box}"; provider="${provider##*.}"
 
   box_json=$(printf '      {
-	mname": "%s",
+	"name": "%s",
 	"url": "%s",
 	"checksum_type": "sha1",
 	"checksum": "%s"
