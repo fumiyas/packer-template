@@ -17,18 +17,23 @@ pdie() {
 
 ## ======================================================================
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 BOX.JSON ..."
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <BOX_REPO>/<BOX_NAME>"
   exit 1
 fi
 
-box_json_files=("$@")
+box_dir="$1"; shift
+box_index_json="$box_dir/index.json"
+
+box_version_jsons=($(
+  ls "$box_dir"/[0-9]*/index.json
+))
 
 box_latest_json=$(
   jq \
     --compact-output \
     '.versions | .[0] |[.version, input_filename]' \
-    "${box_json_files[@]}" \
+    "${box_version_jsons[@]}" \
   |sed 's/^\["//;s/"\]$//;s/","/ /' \
   |sort --reverse --version-sort \
   |head -n1 \
@@ -54,13 +59,16 @@ fi
   jq \
     --compact-output \
     '.versions |.[]' \
-    "${box_json_files[@]}" \
+    "${box_version_jsons[@]}" \
   |sed '$!s/$/,/' \
   ;
   echo ']'
 
   echo '}'
-} |jq '.'
+} \
+|jq '.' \
+>"$box_index_json" \
+;
 
 ## ======================================================================
 

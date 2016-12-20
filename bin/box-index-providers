@@ -17,15 +17,20 @@ pdie() {
 
 ## ======================================================================
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 BOX.JSON ..."
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <BOX_REPO>/<BOX_NAME>/<BOX_VERSION>"
   exit 1
 fi
 
-box_json_files=("$@")
+box_dir="$1"; shift
+box_index_json="$box_dir/index.json"
+
+box_provider_jsons=($(
+  ls "$box_dir"/*.json |fgrep -v "$box_index_json"
+))
 
 box_versions=($(
-  jq '.versions | .[0] |.version' "${box_json_files[@]}" \
+  jq '.versions | .[0] |.version' "${box_provider_jsons[@]}" \
   |sort -u \
   ;
 ))
@@ -42,7 +47,7 @@ box_version="${box_versions[0]}"
   jq \
     --compact-output \
     'del(.versions)' \
-    "${box_json_files[0]}" \
+    "${box_provider_jsons[0]}" \
   |sed 's/}$/,/' \
   ;
 
@@ -50,11 +55,14 @@ box_version="${box_versions[0]}"
   jq \
     --compact-output \
     '.versions |.[] |.providers |.[]' \
-    "${box_json_files[@]}" \
+    "${box_provider_jsons[@]}" \
   |sed '$!s/$/,/' \
   ;
   echo ']}]}'
-} |jq '.'
+} \
+|jq '.' \
+>"$box_index_json" \
+;
 
 ## ======================================================================
 
