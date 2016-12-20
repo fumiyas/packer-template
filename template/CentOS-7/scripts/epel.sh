@@ -13,21 +13,17 @@ el_arch=$(uname -m)
 
 epel_url="$epel_url_prefix/$el_ver_major/$el_arch"
 
-epel_release_url=$(
+epel_release_rpm=$(
   curl \
     --location \
-    "$epel_url/repoview/epel-release.html" \
+    "$epel_url/e/" \
   |sed \
     -n \
-    's#^.*<a href="\(\([^"]*/\)\?epel-release-[0-9]\+-[0-9]\+\.noarch\.rpm\)".*$#\1#p' \
+    's/.*<a href="\(epel-release-[0-9]\{1,\}-[0-9]\{1,\}\.noarch\.rpm\)".*/\1/p' \
   ;
 )
 
-if [[ ! $epel_release_url =~ ^https?:// ]]; then
-  epel_release_url="$epel_url/repoview/$epel_release_url"
-fi
-
-rpm -iv "$epel_release_url"
+rpm -iv "$epel_url/e/$epel_release_rpm"
 
 mkdir -p /etc/yum.repos.d/dist
 cp -a /etc/yum.repos.d/epel{,-*}.repo /etc/yum.repos.d/dist/
