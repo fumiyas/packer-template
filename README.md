@@ -56,14 +56,25 @@ $ ls $GOPATH/bin/packer
 ...
 ```
 
-Update:
-
-FIXME: Is the following command-line correct?
+Update to the latest development version:
 
 ```console
 $ cd $GOPATH/src/github.com/mitchellh/packer
-$ make deps updatedeps
-$ go get -u
+$ git checkout master
+$ git pull
+$ PACKER_DEV=1 make bin
+...
+```
+
+Build the specific version:
+
+```console
+$ cd $GOPATH/src/github.com/mitchellh/packer
+$ git tag
+...
+$ git checkout -b v0.12.1 v0.12.1
+Switched to a new branch 'v0.12.1'
+$ PACKER_DEV=1 make bin
 ...
 ```
 
