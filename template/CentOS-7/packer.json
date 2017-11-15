@@ -21,7 +21,7 @@
     "vm_disk_size": "40000",
     "ssh_username": "root",
     "ssh_password": "root",
-    "ssh_wait_timeout": "60m",
+    "ssh_wait_timeout": "120m",
     "shutdown_command": "poweroff",
     "provisioner_shell": "bash -uex",
     "provisioner_shell_trap": "sleep 3600",
