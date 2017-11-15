@@ -1,14 +1,14 @@
 #!/bin/bash
 ##
 ## Vagrant Box: Create an index metadata for a version from per-provider metadata
-## Copyright (c) 2015-2016 SATOH Fumiyasu @ OSS Technology Corp., Japan
+## Copyright (c) 2015-2017 SATOH Fumiyasu @ OSS Technology Corp., Japan
 ##
 ## License: GNU General Public License version 3
 ##
 
 set -u
-set -o pipefail || exit 1
-shopt -s lastpipe || exit 1
+set -o pipefail || exit $?
+shopt -s lastpipe || exit $?
 
 pdie() {
   echo "$0: ERROR: $1"
@@ -67,4 +67,3 @@ box_version="${box_versions[0]}"
 ## ======================================================================
 
 exit 0
-

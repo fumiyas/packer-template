@@ -1,7 +1,7 @@
 #!/bin/bash
 ##
 ## My Packer templates and build script
-## Copyright (c) 2015-2016 SATOH Fumiyasu @ OSS Technology Corp., Japan
+## Copyright (c) 2015-2017 SATOH Fumiyasu @ OSS Technology Corp., Japan
 ##
 ## License: GNU General Public License version 3
 ##
@@ -31,7 +31,7 @@ fi
 
 packer="packer"
 packer_build_options=()
-base_dir="$(cd "${0%/*}/.." && echo "$PWD")" || exit 1
+base_dir="$(cd "${0%/*}/.." && echo "$PWD")" || exit $?
 build_dir="$base_dir/build"
 dist_dir="$base_dir/dist"
 template_dir="$base_dir/template"
@@ -45,14 +45,14 @@ conf="$1"; shift
 ## ======================================================================
 
 if [[ -f $conf_default ]]; then
-  . "$conf_default" || exit 1
+  . "$conf_default" || exit $?
 fi
 if [[ -f $conf_local ]]; then
-  . "$conf_local" || exit 1
+  . "$conf_local" || exit $?
 fi
 
-. "$conf" || exit 1
-. "$template_dir/$box_template/template.conf" || exit 1
+. "$conf" || exit $?
+. "$template_dir/$box_template/template.conf" || exit $?
 
 box_version="${box_version:-$template_version.$conf_version}"
 dist_ver_dir="$dist_dir/$box_name/$box_version"
@@ -75,13 +75,13 @@ done
 
 ## ======================================================================
 
-mkdir -p "$build_dir" || exit 1
-mkdir "$box_build_dir" || exit 1
-cd "$box_build_dir" || exit 1
-mkdir "$packer_build_name" || exit 1
-cd "$packer_build_name" || exit 1
+mkdir -p "$build_dir" || exit $?
+mkdir "$box_build_dir" || exit $?
+cd "$box_build_dir" || exit $?
+mkdir "$packer_build_name" || exit $?
+cd "$packer_build_name" || exit $?
 
-cp -rp "$template_dir/$box_template"/* . || exit 1
+cp -rp "$template_dir/$box_template"/* . || exit $?
 
 (
   echo '{'
@@ -109,9 +109,9 @@ typeset -a packer_build=(
     packer.json
 )
 
-echo '#!/bin/sh' >packer-build.sh || exit 1
-echo -E "${packer_build[*]}" >>packer-build.sh || exit 1
-chmod +x packer-build.sh || exit 1
+echo '#!/bin/sh' >packer-build.sh || exit $?
+echo -E "${packer_build[*]}" >>packer-build.sh || exit $?
+chmod +x packer-build.sh || exit $?
 
 ## ----------------------------------------------------------------------
 
@@ -125,13 +125,13 @@ run \
 || : \
 ;
 
-mv "$box_name".*.box ../ || exit 1
+mv "$box_name".*.box ../ || exit $?
 
 ## ----------------------------------------------------------------------
 
-cd .. || exit 1
+cd .. || exit $?
 
-tar cf "$packer_build_name.tar" "$packer_build_name" || exit 1
+tar cf "$packer_build_name.tar" "$packer_build_name" || exit $?
 
 ## ----------------------------------------------------------------------
 
@@ -165,14 +165,14 @@ done
 
 ## ----------------------------------------------------------------------
 
-mkdir -p "$dist_ver_dir" || exit 1
+mkdir -p "$dist_ver_dir" || exit $?
 
 mv \
   *.json \
   "$box_name".*.box \
   "$packer_build_name.tar" \
   "$dist_ver_dir/" \
-|| exit 1 \
+|| exit $? \
 ;
 
 ## ======================================================================
@@ -180,4 +180,3 @@ mv \
 rm -rf "$box_build_dir"
 
 exit 0
-
