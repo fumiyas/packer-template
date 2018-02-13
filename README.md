@@ -62,7 +62,8 @@ Update to the latest development version:
 $ cd $GOPATH/src/github.com/mitchellh/packer
 $ git checkout master
 $ git pull
-$ PACKER_DEV=1 make bin
+$ make deps
+$ make dev
 ...
 ```
 
@@ -72,9 +73,10 @@ Build the specific version:
 $ cd $GOPATH/src/github.com/mitchellh/packer
 $ git tag
 ...
-$ git checkout -b v0.12.1 v0.12.1
-Switched to a new branch 'v0.12.1'
-$ PACKER_DEV=1 make bin
+$ git checkout -b v1.1.2 v1.1.2
+Switched to a new branch 'v1.1.2'
+$ make deps
+$ make dev
 ...
 ```
 
