@@ -13,7 +13,7 @@ if [[ ${el_ver#*.} -le 4 ]]; then
   yum -y install --disablerepo='*' --enablerepo=updates nss
 fi
 
-epel_url_prefix="http://download.fedoraproject.org/pub/epel"
+epel_url_prefix="https://download.fedoraproject.org/pub/epel"
 el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 el_ver_major="${el_ver%%.*}"
 el_arch=$(uname -m)

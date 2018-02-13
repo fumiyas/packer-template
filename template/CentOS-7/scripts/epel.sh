@@ -6,7 +6,7 @@
 set -u
 set -e
 
-epel_url_prefix="http://download.fedoraproject.org/pub/epel"
+epel_url_prefix="https://download.fedoraproject.org/pub/epel"
 el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 el_ver_major="${el_ver%%.*}"
 el_arch=$(uname -m)
