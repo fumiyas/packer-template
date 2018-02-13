@@ -11,7 +11,7 @@ el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 el_ver_major="${el_ver%%.*}"
 el_arch=$(uname -m)
 
-epel_url="$epel_url_prefix/$el_ver_major/$el_arch"
+epel_url="$epel_url_prefix/$el_ver_major/$el_arch/Packages"
 
 epel_release_rpm=$(
   curl \
@@ -33,4 +33,3 @@ sed -i \
   -e 's/^gpgcheck=.*/&\nenabled=0/' \
   /etc/yum.repos.d/epel{,-*}.repo \
 ;
-
