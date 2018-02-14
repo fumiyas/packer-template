@@ -114,7 +114,7 @@ $ cat dist/CentOS-7.3-x86_64/1.0.0/index.json
 Create (or update) index.json for versions:
 
 ```console
-$ bin/box-index-providers dist/CentOS-7.3-x86_64
+$ bin/box-index-versions dist/CentOS-7.3-x86_64
 $ cat dist/CentOS-7.3-x86_64/index.json
 ...
 ```
