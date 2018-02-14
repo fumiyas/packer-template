@@ -9,6 +9,7 @@
 set -u
 set -o pipefail || exit $?
 shopt -s lastpipe || exit $?
+shopt -s nullglob || exit $?
 
 pdie() {
   echo "$0: ERROR: $1"
@@ -25,9 +26,7 @@ fi
 box_dir="$1"; shift
 box_index_json="$box_dir/index.json"
 
-box_version_jsons=($(
-  ls "$box_dir"/[0-9]*/index.json
-))
+box_version_jsons=("$box_dir"/[0-9]*/index.json)
 
 box_latest_json=$(
   jq \

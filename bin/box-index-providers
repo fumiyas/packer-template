@@ -9,6 +9,7 @@
 set -u
 set -o pipefail || exit $?
 shopt -s lastpipe || exit $?
+shopt -s nullglob || exit $?
 
 pdie() {
   echo "$0: ERROR: $1"
