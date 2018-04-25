@@ -119,8 +119,8 @@ chmod +x packer-build.sh || exit $?
 run \
   env \
     PACKER_LOG="$packer_log" \
-    PACKER_CACHE_DIR="$iso_dir" \
-  "${packer_build[@]}" \
+    PACKER_CACHE_DIR="$iso_dir/cache" \
+    "${packer_build[@]}" \
 2>&1 \
 |tee \
   packer-build.log \
