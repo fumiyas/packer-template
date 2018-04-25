@@ -108,6 +108,7 @@ typeset -a packer_build=(
   "$packer"
     build
     -var-file=packer.var.json
+    -on-error=ask
     ${packer_build_options+"${packer_build_options[@]}"}
     packer.main.json
 )
