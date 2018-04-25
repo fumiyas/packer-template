@@ -84,6 +84,8 @@ cd "$packer_build_name" || exit $?
 
 cp -rp "$template_dir/$box_template"/* . || exit $?
 
+sed '/^ *\/\/.*/d' packer.json >packer.main.json || exit $?
+
 (
   echo '{'
   for var_name in "${!vars[@]}"; do
@@ -107,7 +109,7 @@ typeset -a packer_build=(
     build
     -var-file=packer.var.json
     ${packer_build_options+"${packer_build_options[@]}"}
-    packer.json
+    packer.main.json
 )
 
 echo '#!/bin/sh' >packer-build.sh || exit $?
