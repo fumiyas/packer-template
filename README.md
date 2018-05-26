@@ -35,7 +35,7 @@ $ apt install packer vagrant virtualbox qemu-kvm qemu-utils
 ### Install softwares from package released on each developer site
 
 * Packer Releases
-  * https://github.com/mitchellh/packer/releases
+  * https://github.com/hashicorp/packer/releases
 * Vagrant by HashiCorp
   * https://www.vagrantup.com/downloads.html
 * Oracle VM VirtualBox
@@ -48,7 +48,7 @@ Initial build and install:
 ```console
 $ apt install golang
 ...
-$ go get github.com/mitchellh/packer
+$ go get github.com/hashicorp/packer
 ...
 $ ls ${GOPATH-$HOME/go}/bin/packer
 ...
@@ -57,7 +57,7 @@ $ ls ${GOPATH-$HOME/go}/bin/packer
 Update to the latest development version:
 
 ```console
-$ cd ${GOPATH-$HOME/go}/src/github.com/mitchellh/packer
+$ cd ${GOPATH-$HOME/go}/src/github.com/hashicorp/packer
 $ git checkout master
 $ git pull
 $ make deps
@@ -68,7 +68,7 @@ $ make dev
 Build the specific version:
 
 ```console
-$ cd ${GOPATH-$HOME/go}/src/github.com/mitchellh/packer
+$ cd ${GOPATH-$HOME/go}/src/github.com/hashicorp/packer
 $ git tag
 ...
 $ git checkout -b v1.1.2 v1.1.2
