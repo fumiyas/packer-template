@@ -52,14 +52,14 @@ $ apt install golang
 ...
 $ go get github.com/mitchellh/packer
 ...
-$ ls $GOPATH/bin/packer
+$ ls ${GOPATH-$HOME/go}/bin/packer
 ...
 ```
 
 Update to the latest development version:
 
 ```console
-$ cd $GOPATH/src/github.com/mitchellh/packer
+$ cd ${GOPATH-$HOME/go}/src/github.com/mitchellh/packer
 $ git checkout master
 $ git pull
 $ make deps
@@ -70,7 +70,7 @@ $ make dev
 Build the specific version:
 
 ```console
-$ cd $GOPATH/src/github.com/mitchellh/packer
+$ cd ${GOPATH-$HOME/go}/src/github.com/mitchellh/packer
 $ git tag
 ...
 $ git checkout -b v1.1.2 v1.1.2
