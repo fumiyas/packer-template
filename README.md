@@ -28,7 +28,7 @@ Preparation
 ### Install softwares from standard package repository
 
 ```console
-$ apt install packer vagrant virtualbox qemu-kvm
+$ apt install packer vagrant virtualbox qemu-kvm qemu-utils
 ...
 ```
 
