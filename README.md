@@ -15,12 +15,12 @@ My Packer templates and build script
 Requirements
 ---------------------------------------------------------------------
 
-* Packer 0.11+
-* Vagrant 1.9+
-* VM Manager:
-  * VirtualBox 5.1+
-  * QEMU
-  * VMware
+  * Packer 0.11+
+  * Vagrant 1.9+
+  * VM Manager:
+      * VirtualBox 5.1+
+      * QEMU
+      * VMware
 
 Preparation
 ---------------------------------------------------------------------
@@ -34,12 +34,12 @@ $ apt install packer vagrant virtualbox qemu-kvm qemu-utils
 
 ### Install softwares from package released on each developer site
 
-* Packer Releases
-  * https://github.com/hashicorp/packer/releases
-* Vagrant by HashiCorp
-  * https://www.vagrantup.com/downloads.html
-* Oracle VM VirtualBox
-  * https://www.virtualbox.org/wiki/Downloads
+  * Packer Releases
+      * https://github.com/hashicorp/packer/releases
+  * Vagrant by HashiCorp
+      * https://www.vagrantup.com/downloads.html
+  * Oracle VM VirtualBox
+      * https://www.virtualbox.org/wiki/Downloads
 
 ### Build and install Packer from source
 
