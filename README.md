@@ -30,8 +30,6 @@ Preparation
 ```console
 $ apt install packer vagrant virtualbox qemu-kvm
 ...
-$ go get github.com/mitchellh/packer
-...
 ```
 
 ### Install softwares from package released on each developer site
