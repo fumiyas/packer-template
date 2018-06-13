@@ -40,6 +40,7 @@
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/virtualbox.sh",
+	    "scripts/misc.sh",
 	    "scripts/cleanup.sh",
 	    "scripts/info.sh"
 	  ]
