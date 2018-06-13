@@ -2,6 +2,7 @@
   "variables": {
     "box_name": "CentOS-7",
     "headless": "false",
+    "qemu_display": "gtk",
     "http_directory": ".",
     "boot_wait": "10s",
     "os_type_vbox": "RedHat_64",
@@ -91,7 +92,6 @@
       ],
       "disk_size": "{{user `vm_disk_size`}}",
       "hard_drive_interface": "sata",
-
       "vm_name": "{{user `box_name`}}",
       "iso_interface": "sata",
       "iso_checksum": "{{user `iso_checksum`}}",
@@ -114,8 +114,10 @@
     {
       "type": "qemu",
       "headless": "{{user `headless`}}",
+      "use_default_display": "true",
       "qemuargs": [
 	[ "-machine", "type=pc,accel=kvm:tcg" ],
+	[ "-display", "{{user `qemu_display`}}" ],
 	[ "-smp", "{{user `vm_cpus`}}" ],
 	[ "-m", "{{user `vm_memory_size`}}M" ]
       ],
