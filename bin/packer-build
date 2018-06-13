@@ -100,7 +100,9 @@ cd "$packer_build_name" || exit $?
 
 cp -rp "$template_dir/$box_template"/* . || exit $?
 
-sed '/^ *\/\/.*/d' packer.json >packer.main.json || exit $?
+## Remove comments in packer.json
+mv packer.json packer.json.dist || exit $?
+sed '/^ *\/\/.*/d' packer.json.dist >packer.json || exit $?
 
 (
   echo '{'
@@ -126,7 +128,7 @@ typeset -a packer_build=(
     -var-file=packer.var.json
     -on-error=ask
     ${packer_build_options+"${packer_build_options[@]}"}
-    packer.main.json
+    packer.json
 )
 
 echo '#!/bin/sh' >packer-build.sh || exit $?
