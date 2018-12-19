@@ -46,15 +46,19 @@ conf="$1"; shift
 
 ## ======================================================================
 
+confs=()
 if [[ -f $conf_default ]]; then
   . "$conf_default" || exit $?
+  confs+=("$conf_default")
 fi
 if [[ -f $conf_local ]]; then
   . "$conf_local" || exit $?
+  confs+=("$conf_local")
 fi
 
 . "$conf" || exit $?
 . "$template_dir/$box_template/template.conf" || exit $?
+confs+=("$conf" "$template_dir/$box_template/template.conf")
 
 box_version="${box_version:-$template_version.$conf_version}"
 dist_ver_dir="$dist_dir/$box_name/$box_version"
@@ -68,7 +72,7 @@ vars=(
   [iso_dir]="$iso_dir"
 )
 
-sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "$conf" \
+sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "${confs[@]}" \
 |sort -u \
 |while read var_name; do
   [[ $var_name == "box_template" ]] && continue
