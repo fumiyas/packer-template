@@ -70,6 +70,7 @@ packer_build_name="packer-build.$box_name"
 typeset -A vars
 vars=(
   [iso_dir]="$iso_dir"
+  [qemu_display]="gtk"
 )
 
 sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "${confs[@]}" \
@@ -78,21 +79,6 @@ sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "${confs[@]}" \
   [[ $var_name == "box_template" ]] && continue
   eval "vars[$var_name]=\"\$$var_name\""
 done
-
-## HACK: Packer QEMU builder with headless=false uses the command-line:
-##   qemu-system-x86_64 ... -display sdl ...
-## but it fails because some QEMU binary does NOT support SDL display.
-if type "$qemu_system" >&/dev/null; then
-  if [[ ${vars[headless]-false} == false && ${vars[qemu_display]+set} != set ]]; then
-    vars[qemu_display]='none'
-    for display in gtk sdl; do
-      if "$qemu_system" -display "$display" -version >&/dev/null; then
-	vars[qemu_display]="$display"
-	break
-      fi
-    done
-  fi
-fi
 
 ## ======================================================================
 
