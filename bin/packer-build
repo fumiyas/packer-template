@@ -82,6 +82,7 @@ typeset -A vars
 vars=(
   [iso_dir]="$iso_dir"
   [box_basename]="$box_basename"
+  [box_output_directory]="$box_build_dir"
   [vm_name]="$vm_name"
   [qemu_display]="gtk"
 )
@@ -153,8 +154,6 @@ run \
   "../$box_basename.packer-build.$id.log" \
 || : \
 ;
-
-mv *.box ../ || exit $?
 
 ## ----------------------------------------------------------------------
 

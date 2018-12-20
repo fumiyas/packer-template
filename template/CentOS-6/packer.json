@@ -59,7 +59,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "{{user `box_basename`}}.{{.Provider}}.box"
+      "output": "{{user `box_output_directory`}}/{{user `box_basename`}}.{{.Provider}}.box"
     }
   ],
   "builders": [
