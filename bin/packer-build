@@ -70,6 +70,7 @@ conf_template="$template_dir/$box_template/template.conf"
 confs+=("$conf_template")
 
 box_version="${box_version:-$template_version.$conf_version}"
+vm_name="packer-build.$box_basename"
 dist_ver_dir="$dist_dir/$box_name/$box_version"
 box_build_dir="$build_dir/$box_name.$id.tmp"
 packer_build_name="packer-build.$box_name"
@@ -79,6 +80,7 @@ packer_build_name="packer-build.$box_name"
 typeset -A vars
 vars=(
   [iso_dir]="$iso_dir"
+  [vm_name]="$vm_name"
   [qemu_display]="gtk"
 )
 

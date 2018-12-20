@@ -93,7 +93,7 @@
       ],
       "disk_size": "{{user `vm_disk_size`}}",
       "hard_drive_interface": "sata",
-      "vm_name": "{{user `box_name`}}",
+      "vm_name": "{{user `vm_name`}}",
       "iso_interface": "sata",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -125,7 +125,7 @@
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "disk_size": "{{user `vm_disk_size`}}",
-      "vm_name": "{{user `box_name`}}",
+      "vm_name": "{{user `vm_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
@@ -155,7 +155,7 @@
       },
       "disk_size": "{{user `vm_disk_size`}}",
 
-      "vm_name": "{{user `box_name`}}",
+      "vm_name": "{{user `vm_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
