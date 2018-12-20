@@ -11,7 +11,7 @@ set -o pipefail
 shopt -s lastpipe
 
 id="$(date +%Y%m%d%H%M).$$"
-tab=$'\n'
+tab=$'\t'
 lf=$'\n'
 
 pdie() {
