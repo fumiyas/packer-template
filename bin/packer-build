@@ -39,6 +39,7 @@ template_dir="$base_dir/template"
 iso_dir="$base_dir/iso"
 conf_default="$base_dir/etc/default.conf"
 conf_local="$base_dir/etc/local.conf"
+conf_local_dir="$base_dir/etc/local.conf.d"
 box_url_prefix="file://$dist_dir/"
 qemu_system="qemu-system-x86_64"
 
@@ -46,7 +47,7 @@ conf="$1"; shift
 
 ## ======================================================================
 
-confs=()
+confs=("$conf")
 if [[ -f $conf_default ]]; then
   . "$conf_default" || exit $?
   confs+=("$conf_default")
@@ -55,10 +56,18 @@ if [[ -f $conf_local ]]; then
   . "$conf_local" || exit $?
   confs+=("$conf_local")
 fi
+for conf_local_file in "$conf_local_dir"/*.conf; do
+  if [[ -f $conf_local_file ]]; then
+    . "$conf_local_file" || exit $?
+    confs+=("$conf_local_file")
+  fi
+done
 
 . "$conf" || exit $?
-. "$template_dir/$box_template/template.conf" || exit $?
-confs+=("$conf" "$template_dir/$box_template/template.conf")
+
+conf_template="$template_dir/$box_template/template.conf"
+. "$conf_template" || exit $?
+confs+=("$conf_template")
 
 box_version="${box_version:-$template_version.$conf_version}"
 dist_ver_dir="$dist_dir/$box_name/$box_version"
