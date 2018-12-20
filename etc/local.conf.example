@@ -1,0 +1,9 @@
+packer_log=1
+
+packer_build_options=(-only=virtualbox-iso)
+#packer_build_options=(-only=qemu)
+#packer_build_options=(-only=vmware-iso)
+#packer_build_options=(-only=virtualbox-iso,vmware-iso)
+
+qemu_display=none
+#qemu_display=sdl
