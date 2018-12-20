@@ -160,7 +160,7 @@ mv *.box ../ || exit $?
 
 cd .. || exit $?
 
-tar cf "$packer_build_name.tar" "$packer_build_name" || exit $?
+tar czf "$packer_build_name.tar.gz" "$packer_build_name" || exit $?
 
 ## ----------------------------------------------------------------------
 
@@ -199,7 +199,7 @@ mkdir -p "$dist_ver_dir" || exit $?
 mv \
   *.json \
   *.box \
-  "$packer_build_name.tar" \
+  "$packer_build_name.tar.gz" \
   "$dist_ver_dir/" \
 || exit $? \
 ;
