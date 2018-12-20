@@ -72,7 +72,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "{{user `box_name`}}.{{.Provider}}.box"
+      "output": "{{user `box_basename`}}.{{.Provider}}.box"
     }
   ],
   "builders": [
