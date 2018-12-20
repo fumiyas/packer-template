@@ -133,6 +133,7 @@ typeset -a packer_build=(
     build
     -var-file=packer.var.json
     -on-error=ask
+    -timestamp-ui
     ${packer_build_options+"${packer_build_options[@]}"}
     packer.json
 )
