@@ -72,7 +72,7 @@ confs+=("$conf_template")
 box_version="${box_version:-$template_version.$conf_version}"
 box_basename="${box_name//\//-}"
 vm_name="packer-build.$box_basename"
-dist_ver_dir="$dist_dir/$box_name/$box_version"
+box_dist_ver_dir="$dist_dir/$box_name/$box_version"
 box_build_dir="$build_dir/$box_basename.$id.tmp"
 packer_build_log="$build_dir/$box_basename.packer-build.$id.log"
 packer_build_name="packer-build.$box_basename"
@@ -194,13 +194,13 @@ done
 
 ## ----------------------------------------------------------------------
 
-mkdir -p "$dist_ver_dir" || exit $?
+mkdir -p "$box_dist_ver_dir" || exit $?
 
 mv \
   *.json \
   *.box \
   "$packer_build_name.tar.gz" \
-  "$dist_ver_dir/" \
+  "$box_dist_ver_dir/" \
 || exit $? \
 ;
 
