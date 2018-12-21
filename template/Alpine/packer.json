@@ -1,0 +1,134 @@
+{
+  "variables": {
+    "box_name": "Alpine",
+    "headless": "false",
+    "qemu_display": "gtk",
+    "http_directory": ".",
+    "boot_wait": "10s",
+    "os_type_vbox": "Linux_64",
+    "os_name": "Alpine",
+    "os_version_major": "3",
+    "os_version_minor": "8",
+    "os_version_micro": "0",
+    "os_arch": "x86_64",
+    "iso_dir": "../../iso",
+    "iso_url_prefix": "http://dl-cdn.alpinelinux.org/",
+    "iso_variant": "virt",
+    "iso_checksum": "",
+    "iso_checksum_type": "none",
+    "vm_cpus": "1",
+    "vm_memory_size": "64",
+    "vm_disk_size": "100",
+    "ssh_username": "root",
+    "ssh_password": "root",
+    "ssh_wait_timeout": "120m",
+    "shutdown_command": "poweroff",
+    "provisioner_shell": "sh -uex",
+    "provisioner_shell_trap": "sleep 3600",
+    "#": "#"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "export LC_ALL=C {{.Vars}}; {{user `provisioner_shell`}} '{{.Path}}'; ret=$?; [ $ret -ne 0 ] && { echo \"Shell provisioner failed: Exit code $ret\" >&2; set -x; {{user `provisioner_shell_trap`}}; }; exit $ret",
+      "override": {
+	"virtualbox-iso": {
+	  "scripts": [
+	    "scripts/setup.sh"
+	  ]
+	},
+	"qemu": {
+	  "scripts": [
+	    "scripts/setup.sh"
+	  ]
+	}
+      }
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "{{user `box_output_directory`}}/{{user `box_basename`}}.{{.Provider}}.box"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "headless": "{{user `headless`}}",
+      "virtualbox_version_file": ".vbox_version",
+      "guest_os_type": "{{user `os_type_vbox`}}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "vboxmanage": [
+	["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
+	["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"],
+	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
+	["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
+	["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"]
+      ],
+      "disk_size": "{{user `vm_disk_size`}}",
+      "hard_drive_interface": "sata",
+      "vm_name": "{{user `vm_name`}}",
+      "iso_interface": "sata",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name` |lower}}-{{user `iso_variant`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}-{{user `os_arch`}}.iso",
+	"{{user `iso_url_prefix`}}{{user `os_name` |lower}}/v{{user `os_version_major`}}.{{user `os_version_minor`}}/releases/{{user `os_arch`}}/{{user `os_name` |lower}}-{{user `iso_variant`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}-{{user `os_arch`}}.iso"
+      ],
+      "boot_wait": "{{user `boot_wait`}}",
+      "boot_command": [
+	"root<enter><wait>",
+	"(<enter>",
+	"sleep 1<enter>",
+	"set -ex<enter>",
+	"ifconfig eth0 up<enter>",
+	"udhcpc -i eth0<enter>",
+	"wget http://{{.HTTPIP}}:{{.HTTPPort}}/answerfile<enter>",
+	"echo 'APKREPOSOPTS=\"{{user `iso_url_prefix`}}{{user `os_name` |lower}}/v{{user `os_version_major`}}.{{user `os_version_minor`}}/main\"' >>answerfile<enter>",
+	"(echo '{{user `ssh_password`}}'; echo '{{user `ssh_password`}}'; echo y) |setup-alpine -f answerfile<enter>",
+	"mount $(fdisk -l |awk '/ Linux$/ {print $1}' |tail -n1) /mnt<enter>",
+	"sed -i 's/^#*\\(PermitRootLogin\\).*/\\1 yes/' /mnt/etc/ssh/sshd_config<enter>",
+	") && reboot || echo 'ERROR: Installation failed!!' >&2<enter>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}",
+      "post_shutdown_delay": "10s"
+    },
+    {
+      "type": "qemu",
+      "headless": "{{user `headless`}}",
+      "use_default_display": "true",
+      "qemuargs": [
+	[ "-machine", "type=pc,accel=kvm:tcg" ],
+	[ "-display", "{{user `qemu_display`}}" ],
+	[ "-smp", "{{user `vm_cpus`}}" ],
+	[ "-m", "{{user `vm_memory_size`}}M" ]
+      ],
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "disk_size": "{{user `vm_disk_size`}}",
+      "vm_name": "{{user `vm_name`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_urls": [
+	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso",
+	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso"
+      ],
+      "boot_wait": "{{user `boot_wait`}}",
+      "boot_command": [
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg systemd.default_timeout_start_sec=180s<enter><wait>"
+      ],
+      "http_directory": "{{user `http_directory`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ssh_password": "{{user `ssh_password`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}"
+    }
+  ]
+}
+

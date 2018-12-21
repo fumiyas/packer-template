@@ -1,0 +1,28 @@
+## https://wiki.alpinelinux.org/wiki/Alpine_setup_scripts
+
+HOSTNAMEOPTS="-n localhost"
+
+KEYMAPOPTS="us us"
+DISKOPTS="-m sys -s 0 /dev/sda"
+
+INTERFACESOPTS="\
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet dhcp
+"
+
+DNSOPTS=""
+#DNSOPTS="-n 8.8.8.8"
+TIMEZONEOPTS="-z Japan"
+SSHDOPTS="-c openssh"
+NTPOPTS="-c chrony"
+PROXYOPTS="none"
+
+APKREPOSOPTS="http://dl-cdn.alpinelinux.org/alpine/v3.8/main"
+#APKREPOSOPTS="-f" ## Detect and add fastest mirror
+#APKREPOSOPTS="-r" ## Add a random mirror and do not prompt
