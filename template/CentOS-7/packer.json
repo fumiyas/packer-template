@@ -134,7 +134,7 @@
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
-	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg<enter><wait>"
+	"<tab> text ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg systemd.default_timeout_start_sec=180s<enter><wait>"
       ],
       "http_directory": "{{user `http_directory`}}",
       "ssh_username": "{{user `ssh_username`}}",
