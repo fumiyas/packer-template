@@ -60,7 +60,6 @@ Update to the latest development version:
 $ cd ${GOPATH-$HOME/go}/src/github.com/hashicorp/packer
 $ git checkout master
 $ git pull
-$ make deps
 $ make dev
 ...
 ```
@@ -71,9 +70,8 @@ Build the specific version:
 $ cd ${GOPATH-$HOME/go}/src/github.com/hashicorp/packer
 $ git tag
 ...
-$ git checkout -b v1.1.2 v1.1.2
-Switched to a new branch 'v1.1.2'
-$ make deps
+$ git checkout -b v1.4.0 v1.4.0
+Switched to a new branch 'v1.4.0'
 $ make dev
 ...
 ```
