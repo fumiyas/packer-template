@@ -114,3 +114,9 @@ $ bin/box-index-versions dist/CentOS-7.3-x86_64
 $ cat dist/CentOS-7.3-x86_64/index.json
 ...
 ```
+
+References
+======================================================================
+
+  * Kickstart Documentation
+      * https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html
