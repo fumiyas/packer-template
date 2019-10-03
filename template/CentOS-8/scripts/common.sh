@@ -9,6 +9,7 @@ sed -i \
   -e 's/ quiet\( \|"\)/\1/' \
   /etc/default/grub \
 ;
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
 systemctl disable kdump.service
 
