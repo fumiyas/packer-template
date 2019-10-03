@@ -3,9 +3,13 @@
 set -u
 umask 0022
 
-VBOX_VERSION=$(cat ~root/.vbox_version)
+vbox_version=$(cat ~root/.vbox_version)
 
-yum -y install \
+rpm_pkglist=$(mktemp /tmp/${0##*/}.XXXXXXXX)
+rpm -qa --queryformat '%{name}\n' |sort >"$rpm_pkglist"
+
+yum install \
+  --assumeyes \
   --disablerepo='*' \
   --enablerepo='base' \
   bzip2 \
@@ -14,7 +18,15 @@ yum -y install \
   gcc \
 ;
 
-mount -o loop ~root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
+mount -o ro,loop ~root/VBoxGuestAdditions_$vbox_version.iso /mnt
 /mnt/VBoxLinuxAdditions.run --nox11
+
+rpm -qa --queryformat '%{name}\n' \
+|sort \
+|diff "$rpm_pkglist" - \
+|sed -n 's/^> //p' \
+|xargs rpm -e \
+;
+
 umount /mnt
-rm -f ~root/VBoxGuestAdditions_$VBOX_VERSION.iso
+rm -f ~root/VBoxGuestAdditions_$vbox_version.iso
