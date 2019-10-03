@@ -58,10 +58,9 @@ if [[ -f $conf_local ]]; then
   confs+=("$conf_local")
 fi
 for conf_local_file in "$conf_local_dir"/*.conf; do
-  if [[ -f $conf_local_file ]]; then
-    . "$conf_local_file" || exit $?
-    confs+=("$conf_local_file")
-  fi
+  [[ -f $conf_local_file ]] || continue
+  . "$conf_local_file" || exit $?
+  confs+=("$conf_local_file")
 done
 
 . "$conf" || exit $?
@@ -169,6 +168,7 @@ cd .. || exit $?
 
 boxes_json=""
 for box in *.box; do
+  [[ -f $box ]] || continue
   url="$box_url_prefix$box_name/$box_version/$box"
   sha1=$(sha1sum "$box" |sed 's/ .*//')
   provider="${box%.box}"; provider="${provider##*.}"

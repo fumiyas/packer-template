@@ -27,7 +27,7 @@ box_dir="$1"; shift
 box_index_json="$box_dir/index.json"
 
 box_provider_jsons=($(
-  ls "$box_dir"/*.json |fgrep -v "$box_index_json"
+  ls "$box_dir"/*.json |fgrep -v '/*.json' |fgrep -v "$box_index_json"
 ))
 
 box_versions=($(
