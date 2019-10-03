@@ -25,7 +25,7 @@
     "ssh_wait_timeout": "120m",
     "shutdown_command": "poweroff",
     "provisioner_shell": "bash -uex",
-    "provisioner_shell_trap": "sleep 3600",
+    "provisioner_shell_trap": ":",
     "#": "#"
   },
   "provisioners": [
