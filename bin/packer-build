@@ -143,6 +143,9 @@ echo '#!/bin/sh' >packer-build.sh || exit $?
 echo -E "${packer_build[*]}" >>packer-build.sh || exit $?
 chmod +x packer-build.sh || exit $?
 
+(cd .. && tar czf "$packer_build_name.tar.gz" "$packer_build_name") || exit $?
+ln -s "../$packer_build_name.tar.gz" "packer-build.tar.gz"
+
 ## ----------------------------------------------------------------------
 
 run \
@@ -161,8 +164,6 @@ run \
 ## ----------------------------------------------------------------------
 
 cd .. || exit $?
-
-tar czf "$packer_build_name.tar.gz" "$packer_build_name" || exit $?
 
 ## ----------------------------------------------------------------------
 
