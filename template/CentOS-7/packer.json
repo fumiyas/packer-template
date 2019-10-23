@@ -40,7 +40,7 @@
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/virtualbox.sh",
-	    "scripts/misc.sh",
+	    "scripts/common.sh",
 	    "scripts/cleanup.sh",
 	    "scripts/info.sh"
 	  ]
@@ -51,6 +51,7 @@
 	    "scripts/epel.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
+	    "scripts/common.sh",
 	    "scripts/cleanup.sh",
 	    "scripts/info.sh"
 	  ]
@@ -62,6 +63,7 @@
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
 	    "scripts/vmware.sh",
+	    "scripts/common.sh",
 	    "scripts/cleanup.sh",
 	    "scripts/info.sh"
 	  ]
