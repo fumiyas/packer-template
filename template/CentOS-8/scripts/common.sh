@@ -20,16 +20,3 @@ if dmesg |grep -q VirtualBox; then
   #  nmcli connection modify "$ifname" ipv4.dns-options 'single-request-reopen'
   #done
 fi
-
-mkdir -m 0755 /etc/sysconfig/network-scripts/dist
-cp -p \
-  /etc/sysconfig/network-scripts/ifcfg-* \
-  /etc/sysconfig/network-scripts/dist/ \
-;
-for ifcfg in /etc/sysconfig/network-scripts/ifcfg-*; do
-  sed -i \
-    -e '/^HWADDR=/d' \
-    -e '/^UUID=/d' \
-    "$ifcfg" \
-  ;
-done
