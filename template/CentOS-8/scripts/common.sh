@@ -16,8 +16,8 @@ systemctl disable kdump.service
 if dmesg |grep -q VirtualBox; then
   ## https://access.redhat.com/site/solutions/58625 (subscription required)
   echo 'RES_OPTIONS="single-request-reopen"' >>/etc/sysconfig/network
-  #for if in $(nmcli connection |sed '1d;s/ .*//'); do
-  #  nmcli connection modify "$if" ipv4.dns-options 'single-request-reopen'
+  #for ifname in $(nmcli --terse --fields NAME connection); do
+  #  nmcli connection modify "$ifname" ipv4.dns-options 'single-request-reopen'
   #done
 fi
 
