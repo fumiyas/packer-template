@@ -29,6 +29,9 @@ box_index_json="$box_dir/index.json"
 box_provider_jsons=($(
   ls "$box_dir"/*.json |fgrep -v '/*.json' |fgrep -v "$box_index_json"
 ))
+if [[ ${#box_provider_jsons[@]} -eq 0 ]]; then
+  pdie "No provider JSON files found"
+fi
 
 box_versions=($(
   jq '.versions | .[0] |.version' "${box_provider_jsons[@]}" \

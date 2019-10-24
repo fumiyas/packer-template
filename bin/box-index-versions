@@ -27,6 +27,9 @@ box_dir="$1"; shift
 box_index_json="$box_dir/index.json"
 
 box_version_jsons=("$box_dir"/[0-9]*/index.json)
+if [[ ${#box_version_jsons[@]} -eq 0 ]]; then
+  pdie "No version JSON files found"
+fi
 
 box_latest_json=$(
   jq \
