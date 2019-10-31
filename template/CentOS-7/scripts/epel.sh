@@ -6,13 +6,23 @@
 set -u
 set -e
 
-yum install --assumeyes epel-release
+if ! rpm --query epel-release >/dev/null; then
+  yum install --assumeyes epel-release
+fi
 
 mkdir -p /etc/yum.repos.d/dist
-cp -a /etc/yum.repos.d/epel{,-*}.repo /etc/yum.repos.d/dist/
 
-sed -i \
-  -e '/^enabled=/d' \
-  -e 's/^gpgcheck=.*/&\nenabled=0/' \
-  /etc/yum.repos.d/epel{,-*}.repo \
-;
+for repo in /etc/yum.repos.d/epel{,-*}.repo; do
+  repo_dist="/etc/yum.repos.d/dist/${repo##*/}"
+
+  if [[ ! -f $repo_dist ]]; then
+    cp -a "$repo" "$repo_dist"
+  fi
+
+  sed \
+    -e '/^enabled=/d' \
+    -e 's/^gpgcheck=.*/&\nenabled=0/' \
+    <"$repo_dist" \
+    >"$repo" \
+  ;
+done

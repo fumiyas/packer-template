@@ -9,4 +9,3 @@ yum -y install \
   fuse-libs \
   open-vm-tools \
 ;
-

@@ -3,11 +3,15 @@
 set -u
 set -e
 
-cp -a /etc/default/grub{,.dist}
-sed -i \
+if [[ ! -f /etc/default/grub.dist ]]; then
+  cp -a /etc/default/grub{,.dist}
+fi
+
+sed \
   -e 's/ rhgb\( \|"\)/\1/' \
   -e 's/ quiet\( \|"\)/\1/' \
-  /etc/default/grub \
+  </etc/default/grub.dist \
+  >/etc/default/grub \
 ;
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
@@ -15,6 +19,10 @@ systemctl disable kdump.service
 systemctl enable getty@ttyS0.service
 
 if dmesg |grep -q VirtualBox; then
+  if [[ ! -f /etc/sysconfig/network.dist ]]; then
+    cp -a /etc/sysconfig/network{,.dist}
+  fi
+  cp -a /etc/sysconfig/network{.dist,}
   ## https://access.redhat.com/site/solutions/58625 (subscription required)
   echo 'RES_OPTIONS="single-request-reopen"' >>/etc/sysconfig/network
   #for ifname in $(nmcli --terse --fields NAME connection); do
