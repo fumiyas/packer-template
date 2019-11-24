@@ -21,7 +21,7 @@ echo "$el_ver" >"/etc/yum/vars/fixedver"
 
 mkdir -p /etc/yum.repos.d/dist
 
-for repo_name in Base AppStream Extras; do
+for repo_name in Base; do
   repo="/etc/yum.repos.d/CentOS-$repo_name.repo"
   repo_fixedver="/etc/yum.repos.d/CentOS-$repo_name-FixedVer.repo"
   repo_dist="/etc/yum.repos.d/dist/CentOS-$repo_name.repo"
