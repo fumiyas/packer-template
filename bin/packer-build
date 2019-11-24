@@ -142,6 +142,12 @@ echo '#!/bin/sh' >packer-build.sh || exit $?
 echo -E "${packer_build[*]}" >>packer-build.sh || exit $?
 chmod +x packer-build.sh || exit $?
 
+mkdir log || exit $?
+cp -p /etc/*release log/
+"$packer" --version >log/packer-version.log
+virtualbox --help &>log/virtualbox-version.log
+qemu-img --version &>log/qemu-version.log
+
 (cd .. && tar czf "$packer_build_name.tar.gz" "$packer_build_name") || exit $?
 ln -s "../$packer_build_name.tar.gz" "packer-build.tar.gz"
 
