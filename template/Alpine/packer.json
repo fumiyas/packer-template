@@ -21,7 +21,7 @@
     "vm_disk_size": "100",
     "ssh_username": "root",
     "ssh_password": "root",
-    "ssh_wait_timeout": "120m",
+    "ssh_timeout": "120m",
     "shutdown_command": "poweroff",
     "provisioner_shell": "sh -uex",
     "provisioner_shell_trap": "sleep 3600",
@@ -95,7 +95,7 @@
       "http_directory": "{{user `http_directory`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
       "shutdown_command": "{{user `shutdown_command`}}",
       "post_shutdown_delay": "10s"
     },
@@ -126,7 +126,7 @@
       "http_directory": "{{user `http_directory`}}",
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_password": "{{user `ssh_password`}}",
-      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "ssh_timeout": "{{user `ssh_timeout`}}",
       "shutdown_command": "{{user `shutdown_command`}}"
     }
   ]
