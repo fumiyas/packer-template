@@ -106,6 +106,20 @@ cd "$packer_build_name" || exit $?
 
 cp -rp "$template_dir/$box_template"/* . || exit $?
 
+## ----------------------------------------------------------------------
+
+sed_opts=()
+for var_name in "${!vars[@]}"; do
+  sed_opts+=(-e "s|@$var_name@|${vars[$var_name]//\|/\\\|}|g")
+done
+
+for t in *.in */*.in; do
+  [[ -f $t ]] || continue
+  sed "${sed_opts[@]}" <"$t" >"${t%.in}" || exit $?
+done
+
+## ----------------------------------------------------------------------
+
 ## Remove comments in packer.json
 mv packer.json packer.json.dist || exit $?
 sed '/^ *\/\/.*/d' packer.json.dist >packer.json || exit $?

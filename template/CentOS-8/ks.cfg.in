@@ -3,9 +3,8 @@ logging --level=debug
 #eula --agreed
 cdrom
 repo --name=BaseOS
-## FIXME: s/8.0.1905/@PLACEHOLDER@/
-url --url=https://mirrors.edge.kernel.org/centos/8.0.1905/BaseOS/x86_64/os/
-#url --url http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/8.0.1905/os/x86_64/
+url --url=http://mirrors.edge.kernel.org/centos/@os_version@/BaseOS/x86_64/os/
+#url --url=http://archive.kernel.org/centos-vault/@os_version@/BaseOS/x86_64/os/
 reboot
 
 text
