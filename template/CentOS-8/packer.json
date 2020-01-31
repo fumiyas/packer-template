@@ -8,6 +8,7 @@
     "os_type_vbox": "RedHat_64",
     "os_type_vmware": "centos-64",
     "os_name": "CentOS",
+    "os_version": "8.0.1905",
     "os_version_major": "8",
     "os_version_minor": "0",
     "os_version_micro": "1905",
@@ -100,7 +101,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `iso_filename`}}",
-	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
+	"{{user `iso_url_prefix`}}{{user `os_version`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
@@ -131,7 +132,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `iso_filename`}}",
-	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
+	"{{user `iso_url_prefix`}}{{user `os_version`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
@@ -161,7 +162,7 @@
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `iso_filename`}}",
-	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
+	"{{user `iso_url_prefix`}}{{user `os_version`}}/isos/{{user `os_arch`}}/{{user `iso_filename`}}"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "boot_command": [
