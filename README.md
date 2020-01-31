@@ -1,7 +1,7 @@
 My Packer templates and build script
 ======================================================================
 
-  * Copyright (c) 2015-2018 SATOH Fumiyasu @ OSS Technology Corp., Japan
+  * Copyright (c) 2015-2020 SATOH Fumiyasu @ OSS Technology Corp., Japan
   * License: GNU General Public License version 3
   * URL: <https://github.com/fumiyas/packer-template>
   * Blog: <https://fumiyas.github.io/>
