@@ -35,7 +35,7 @@ trap sigexit_handler EXIT
 yum install \
   --assumeyes \
   --disablerepo='*' \
-  --enablerepo='base' \
+  --enablerepo='FixedVer-base' \
   bzip2 \
   kernel-devel \
   make \

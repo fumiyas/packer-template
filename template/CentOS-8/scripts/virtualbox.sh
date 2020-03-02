@@ -35,8 +35,8 @@ trap sigexit_handler EXIT
 yum install \
   --assumeyes \
   --disablerepo='*' \
-  --enablerepo='BaseOS' \
-  --enablerepo='AppStream' \
+  --enablerepo='FixedVer-BaseOS' \
+  --enablerepo='FixedVer-AppStream' \
   tar \
   bzip2 \
   kernel-devel \

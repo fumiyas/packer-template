@@ -5,8 +5,8 @@ umask 0022
 
 yum -y install \
   --disablerepo='*' \
-  --enablerepo='BaseOS' \
-  --enablerepo='AppStream' \
+  --enablerepo='FixedVer-BaseOS' \
+  --enablerepo='FixedVer-AppStream' \
   fuse-libs \
   open-vm-tools \
 ;
