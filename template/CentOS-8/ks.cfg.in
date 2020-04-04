@@ -3,8 +3,8 @@ logging --level=debug
 #eula --agreed
 cdrom
 repo --name=BaseOS
-url --url=http://mirrors.edge.kernel.org/centos/@os_version@/BaseOS/x86_64/os/
-#url --url=http://archive.kernel.org/centos-vault/@os_version@/BaseOS/x86_64/os/
+url --url=http://mirrors.edge.kernel.org/centos/@os_version@/BaseOS/x86_64/kickstart/
+#url --url=http://archive.kernel.org/centos-vault/@os_version@/BaseOS/x86_64/kickstart/
 reboot
 
 text
