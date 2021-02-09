@@ -12,6 +12,8 @@ http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\\3/,\
 http://mirror.centos.org/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
 "
 fixed_baseurl="\
+http://ftp.iij.ad.jp/pub/linux/centos/\$fixedver/\\2/\$basearch/\\3/,\
+http://ftp.iij.ad.jp/pub/linux/centos-vault/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/\\3/,\
 http://mirror.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
