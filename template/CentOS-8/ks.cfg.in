@@ -2,9 +2,9 @@ logging --level=debug
 ## RHEL
 #eula --agreed
 cdrom
-repo --name=BaseOS
 url --url=http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/@os_version@/BaseOS/x86_64/kickstart/
 #url --url=https://archive.kernel.org/centos-vault/@os_version@/BaseOS/x86_64/kickstart/
+repo --name=BaseOS --baseurl=http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/@os_version@/BaseOS/x86_64/kickstart/
 reboot
 
 text
