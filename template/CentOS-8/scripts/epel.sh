@@ -7,7 +7,12 @@ set -u
 set -e
 
 if ! rpm --query epel-release >/dev/null; then
-  yum install --assumeyes epel-release
+  yum install \
+    --assumeyes \
+    --disablerepo='*' \
+    --enablerepo='FixedVer-extras' \
+    epel-release \
+  ;
 fi
 
 mkdir -p /etc/yum.repos.d/dist
