@@ -15,10 +15,10 @@ My Packer templates and build script
 Requirements
 ---------------------------------------------------------------------
 
-* Packer 0.11+
+* Packer 0.17+
 * Vagrant 1.9+
 * VM Manager:
-    * VirtualBox 5.1+
+    * VirtualBox 6.1+
     * QEMU
     * VMware
 
