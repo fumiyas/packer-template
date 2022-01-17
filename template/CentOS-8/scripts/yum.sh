@@ -17,8 +17,8 @@ http://ftp.iij.ad.jp/pub/linux/centos-vault/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/\\3/,\
 http://mirror.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
-http://vault.centos.org/\$fixedver/\\2/\$basearch/\\3/,\
-http://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/\\3/\
+https://vault.centos.org/\$fixedver/\\2/\$basearch/\\3/,\
+https://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/\\3/\
 "
 
 echo "$el_ver" >"/etc/yum/vars/fixedver"

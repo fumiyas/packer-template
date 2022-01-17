@@ -16,8 +16,8 @@ fixed_baseurl="\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/\n\
   http://mirror.centos.org/centos/\$fixedver/\\2/\$basearch/\n\
-  http://vault.centos.org/\$fixedver/\\2/\$basearch/\n\
-  http://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/"
+  https://vault.centos.org/\$fixedver/\\2/\$basearch/\n\
+  https://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/"
 
 echo "$el_ver" >"/etc/yum/vars/fixedver"
 
