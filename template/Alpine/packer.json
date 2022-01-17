@@ -14,8 +14,7 @@
     "iso_dir": "../../iso",
     "iso_url_prefix": "http://dl-cdn.alpinelinux.org/",
     "iso_variant": "virt",
-    "iso_checksum": "",
-    "iso_checksum_type": "none",
+    "iso_checksum": "none",
     "vm_cpus": "1",
     "vm_memory_size": "64",
     "vm_disk_size": "100",
@@ -72,7 +71,6 @@
       "vm_name": "{{user `vm_name`}}",
       "iso_interface": "sata",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `os_name` |lower}}-{{user `iso_variant`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}-{{user `os_arch`}}.iso",
 	"{{user `iso_url_prefix`}}{{user `os_name` |lower}}/v{{user `os_version_major`}}.{{user `os_version_minor`}}/releases/{{user `os_arch`}}/{{user `os_name` |lower}}-{{user `iso_variant`}}-{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}-{{user `os_arch`}}.iso"
@@ -114,7 +112,6 @@
       "disk_size": "{{user `vm_disk_size`}}",
       "vm_name": "{{user `vm_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
-      "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_urls": [
 	"file://{{user `iso_dir`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso",
 	"{{user `iso_url_prefix`}}{{user `os_version_major`}}.{{user `os_version_minor`}}.{{user `os_version_micro`}}/isos/{{user `os_arch`}}/{{user `os_name`}}-{{user `os_version_major`}}-{{user `os_arch`}}-{{user `iso_variant`}}-{{user `os_version_micro`}}.iso"
