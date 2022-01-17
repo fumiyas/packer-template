@@ -1,11 +1,11 @@
 My Packer templates and build script
 ======================================================================
 
-  * Copyright (c) 2015-2020 SATOH Fumiyasu @ OSS Technology Corp., Japan
-  * License: GNU General Public License version 3
-  * URL: <https://github.com/fumiyas/packer-template>
-  * Blog: <https://fumiyas.github.io/>
-  * Twitter: <https://twitter.com/satoh_fumiyasu>
+* Copyright (c) 2015-2020 SATOH Fumiyasu @ OSS Technology Corp., Japan
+* License: GNU General Public License version 3
+* URL: <https://github.com/fumiyas/packer-template>
+* Blog: <https://fumiyas.github.io/>
+* Twitter: <https://twitter.com/satoh_fumiyasu>
 
 What's this?
 ---------------------------------------------------------------------
@@ -15,12 +15,12 @@ My Packer templates and build script
 Requirements
 ---------------------------------------------------------------------
 
-  * Packer 0.11+
-  * Vagrant 1.9+
-  * VM Manager:
-      * VirtualBox 5.1+
-      * QEMU
-      * VMware
+* Packer 0.11+
+* Vagrant 1.9+
+* VM Manager:
+    * VirtualBox 5.1+
+    * QEMU
+    * VMware
 
 Preparation
 ---------------------------------------------------------------------
@@ -34,12 +34,12 @@ $ apt install packer vagrant virtualbox qemu-kvm qemu-utils
 
 ### Install softwares from package released on each developer site
 
-  * Packer Releases
-      * https://github.com/hashicorp/packer/releases
-  * Vagrant by HashiCorp
-      * https://www.vagrantup.com/downloads.html
-  * Oracle VM VirtualBox
-      * https://www.virtualbox.org/wiki/Downloads
+* Packer Releases
+    * https://github.com/hashicorp/packer/releases
+* Vagrant by HashiCorp
+    * https://www.vagrantup.com/downloads.html
+* Oracle VM VirtualBox
+    * https://www.virtualbox.org/wiki/Downloads
 
 ### Build and install Packer from source
 
@@ -118,5 +118,5 @@ $ cat dist/CentOS-7.3-x86_64/index.json
 References
 ======================================================================
 
-  * Kickstart Documentation
-      * https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html
+* Kickstart Documentation
+    * https://pykickstart.readthedocs.io/en/latest/kickstart-docs.html
