@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -u
+set -e
 umask 0022
 
 el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)

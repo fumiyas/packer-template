@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -u
+set -e
 umask 0022
 
 LC_TIME=C date >/etc/vagrant_box_build_time

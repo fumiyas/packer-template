@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -u
+set +e
 set -x
 exec 1>&2
 

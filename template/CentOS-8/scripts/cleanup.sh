@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -u
+set -e
 umask 0022
 
 ## Network configuration
