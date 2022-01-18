@@ -17,6 +17,8 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 systemctl disable kdump.service
 
+ln -s ../x/xterm-256color /usr/share/terminfo/m/mlterm-256color
+
 if dmesg |grep -q VirtualBox; then
   if [[ ! -f /etc/sysconfig/network.dist ]]; then
     cp -a /etc/sysconfig/network{,.dist}
