@@ -48,7 +48,7 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
     -e 's/^\[\(.*\)\]/[\L\1]/' \
     -e 's/^enabled=.*/enabled=0/' \
     -e 's!^mirrorlist=!#&!' \
-    -e "s!^#*\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$latest_baseurl!" \
+    -e "s!^#* *\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$latest_baseurl!" \
     <"$repo_dist" \
     >"$repo" \
   ;
@@ -58,7 +58,7 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
     -e "s/^\[/[fixedver-/" \
     -e 's!^\(name=.*\)\$releasever!\1$fixedver!' \
     -e 's!^mirrorlist=!#&!' \
-    -e "s!^#*\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$fixed_baseurl!" \
+    -e "s!^#* *\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$fixed_baseurl!" \
     <"$repo_dist" \
     >"$repo_fixedver" \
   ;
@@ -70,7 +70,7 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
       -e 's/^enabled=.*/enabled=0/' \
       -e 's!^\(name=.*\)\$releasever!\1$fixedver Kickstart!' \
       -e 's!^mirrorlist=!#&!' \
-      -e "s!^#*\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$kickstart_baseurl!" \
+      -e "s!^#* *\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$kickstart_baseurl!" \
       <"$repo_dist" \
       >"$repo_kickstart" \
     ;
