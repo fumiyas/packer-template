@@ -62,7 +62,7 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
     >"$repo_fixedver" \
   ;
 
-  if [[ $repo_name == @(BaseOS|AppStream) ]]; then
+  if [[ $repo_name == @(Base|AppStream) ]]; then
     sed \
       -e "s/^\[/[Kickstart-/" \
       -e 's/^enabled=.*/enabled=0/' \
