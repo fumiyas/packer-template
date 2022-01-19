@@ -35,7 +35,7 @@ echo "$el_ver" >"/etc/yum/vars/fixedver"
 
 mkdir -p /etc/yum.repos.d/dist
 
-for repo_name in BaseOS AppStream Extras PowerTools Devel RT HighAvailability ResilientStorage; do
+for repo_name in Base AppStream Extras PowerTools Devel HA; do
   repo="/etc/yum.repos.d/CentOS-$repo_name.repo"
   repo_fixedver="/etc/yum.repos.d/CentOS-$repo_name-FixedVer.repo"
   repo_kickstart="/etc/yum.repos.d/CentOS-$repo_name-Kickstart.repo"
