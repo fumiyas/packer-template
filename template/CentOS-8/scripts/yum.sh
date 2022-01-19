@@ -8,7 +8,6 @@ el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 
 latest_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/centos/\$releasever/\\2/\$basearch/\\3/,\
-http://ftp.kddlabs.co.jp/Linux/packages/CentOS/\$releasever/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\\3/,\
 http://mirror.centos.org/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
 "
