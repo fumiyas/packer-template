@@ -28,9 +28,6 @@ network --bootproto=dhcp --hostname=localhost
 firewall --enabled --ssh
 services --enabled="sshd"
 
-%addon com_redhat_kdump --disable --reserve-mb='auto'
-%end
-
 ## ================================================================================
 
 %packages
