@@ -16,7 +16,7 @@ autopart --noswap
 bootloader --location=mbr --append="plymouth.enable=0"
 firstboot --disabled
 
-lang --addsupport ja_JP en_US.UTF-8
+lang --addsupport ja_JP C.UTF-8
 timezone --utc Asia/Tokyo
 keyboard jp106
 
