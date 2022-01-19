@@ -45,6 +45,7 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
   fi
 
   sed \
+    -e 's/^\[\(.*\)\]/[\L\1]/' \
     -e 's/^enabled=.*/enabled=0/' \
     -e 's!^mirrorlist=!#&!' \
     -e "s!^#*\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$latest_baseurl!" \
@@ -53,7 +54,8 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
   ;
 
   sed \
-    -e "s/^\[/[FixedVer-/" \
+    -e 's/^\[\(.*\)\]/[\L\1]/' \
+    -e "s/^\[/[fixedver-/" \
     -e 's!^\(name=.*\)\$releasever!\1$fixedver!' \
     -e 's!^mirrorlist=!#&!' \
     -e "s!^#*\(baseurl=\).*/\([a-zA-Z]*\)/[^/]*/\([a-z]*\)/\$!\1$fixed_baseurl!" \
@@ -63,7 +65,8 @@ for repo_name in Base AppStream Extras PowerTools Devel HA; do
 
   if [[ $repo_name == @(Base|AppStream) ]]; then
     sed \
-      -e "s/^\[/[Kickstart-/" \
+      -e 's/^\[\(.*\)\]/[\L\1]/' \
+      -e "s/^\[/[kickstart-/" \
       -e 's/^enabled=.*/enabled=0/' \
       -e 's!^\(name=.*\)\$releasever!\1$fixedver Kickstart!' \
       -e 's!^mirrorlist=!#&!' \

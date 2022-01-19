@@ -12,8 +12,8 @@ rpm -qa --queryformat '%{name}\n' |sort >"$rpm_pkglist"
 yum install \
   --assumeyes \
   --disablerepo='*' \
-  --enablerepo='Kickstart-BaseOS' \
-  --enablerepo='Kickstart-AppStream' \
+  --enablerepo='kickstart-baseos' \
+  --enablerepo='kickstart-appstream' \
   tar \
   bzip2 \
   kernel-devel \
