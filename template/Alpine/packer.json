@@ -15,7 +15,7 @@
     "iso_url_prefix": "http://dl-cdn.alpinelinux.org/",
     "iso_variant": "virt",
     "iso_checksum": "none",
-    "vm_cpus": "1",
+    "vm_cpus": "2",
     "vm_memory_size": "64",
     "vm_disk_size": "100",
     "ssh_username": "root",

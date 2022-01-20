@@ -14,7 +14,7 @@
     "iso_url_prefix": "http://vault.centos.org/",
     "iso_variant": "minimal",
     "iso_checksum": "none",
-    "vm_cpus": "1",
+    "vm_cpus": "2",
     "vm_memory_size": "1024",
     "vm_disk_size": "40000",
     "ssh_username": "root",
