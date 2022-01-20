@@ -10,7 +10,7 @@ if ! rpm --query epel-release >/dev/null; then
   yum install \
     --assumeyes \
     --disablerepo='*' \
-    --enablerepo='FixedVer-extras' \
+    --enablerepo='fixedver-extras' \
     epel-release \
   ;
 fi

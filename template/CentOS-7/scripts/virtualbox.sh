@@ -12,7 +12,7 @@ rpm -qa --queryformat '%{name}\n' |sort >"$rpm_pkglist"
 yum install \
   --assumeyes \
   --disablerepo='*' \
-  --enablerepo='FixedVer-base' \
+  --enablerepo='fixedver-base' \
   bzip2 \
   kernel-devel \
   make \

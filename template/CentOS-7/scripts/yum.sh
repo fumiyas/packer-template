@@ -33,20 +33,22 @@ for repo_name in Base; do
   fi
 
   sed \
-    -e "s/^\[/[FixedVer-/" \
-    -e 's!^\(name=.*\)\$releasever!\1$fixedver!' \
-    -e 's!^mirrorlist=!#&!' \
-    -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$fixed_baseurl!" \
-    <"$repo_dist" \
-    >"$repo_fixedver" \
-  ;
-
-  sed \
+    -e 's/^\[\(.*\)\]/[\L\1]/' \
     -e '/^enabled=/d' \
     -e 's/^gpgcheck=.*/&\nenabled=0/' \
     -e 's!^mirrorlist=!#&!' \
     -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$latest_baseurl!" \
     <"$repo_dist" \
     >"$repo" \
+  ;
+
+  sed \
+    -e 's/^\[\(.*\)\]/[\L\1]/' \
+    -e "s/^\[/[fixedver-/" \
+    -e 's!^\(name=.*\)\$releasever!\1$fixedver!' \
+    -e 's!^mirrorlist=!#&!' \
+    -e "s!^#*\(baseurl=\).*/\([a-z]*\)/[^/]*/\$!\1$fixed_baseurl!" \
+    <"$repo_dist" \
+    >"$repo_fixedver" \
   ;
 done

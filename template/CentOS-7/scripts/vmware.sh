@@ -6,7 +6,7 @@ umask 0022
 
 yum -y install \
   --disablerepo='*' \
-  --enablerepo='FixedVer-base' \
+  --enablerepo='fixedver-base' \
   fuse-libs \
   open-vm-tools \
 ;
