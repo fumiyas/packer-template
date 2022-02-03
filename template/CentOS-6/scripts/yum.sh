@@ -8,12 +8,10 @@ el_ver_major="${el_ver%%.*}"
 
 latest_baseurl="\n\
   http://ftp.iij.ad.jp/pub/linux/centos/$el_ver_major/\\2/\$basearch/\n\
-  http://ftp.jaist.ac.jp/pub/Linux/CentOS/$el_ver_major/\\2/\$basearch/\n\
-  http://mirror.centos.org/centos/$el_ver_major/\\2/\$basearch/"
+  http://ftp.jaist.ac.jp/pub/Linux/CentOS/$el_ver_major/\\2/\$basearch/"
 vault_baseurl="\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$releasever/\\2/\$basearch/\n\
-  http://mirror.centos.org/centos/\$releasever/\\2/\$basearch/\n\
   https://vault.centos.org/\$releasever/\\2/\$basearch/\n\
   https://archive.kernel.org/centos-vault/\$releasever/\\2/\$basearch/"
 

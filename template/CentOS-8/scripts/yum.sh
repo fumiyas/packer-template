@@ -8,15 +8,13 @@ el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 
 latest_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/centos/\$releasever/\\2/\$basearch/\\3/,\
-http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\\3/,\
-http://mirror.centos.org/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
+http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\\3/\
 "
 fixed_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/centos/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.iij.ad.jp/pub/linux/centos-vault/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/\\3/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/\\3/,\
-http://mirror.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
 https://vault.centos.org/\$fixedver/\\2/\$basearch/\\3/,\
 https://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/\\3/\
 "
@@ -25,7 +23,6 @@ http://ftp.iij.ad.jp/pub/linux/centos/\$fixedver/\\2/\$basearch/kickstart/,\
 http://ftp.iij.ad.jp/pub/linux/centos-vault/\$fixedver/\\2/\$basearch/kickstart/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/kickstart/,\
 http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/kickstart/,\
-http://mirror.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
 https://vault.centos.org/\$fixedver/\\2/\$basearch/kickstart/,\
 https://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/kickstart/\
 "
