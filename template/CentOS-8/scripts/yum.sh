@@ -27,15 +27,17 @@ echo "$el_ver" >"/etc/yum/vars/fixedver"
 
 mkdir -p /etc/yum.repos.d/dist
 
-for repo_name in Base AppStream Extras PowerTools HA Devel; do
-  repo="/etc/yum.repos.d/CentOS-$repo_name.repo"
-  repo_fixedver="/etc/yum.repos.d/CentOS-$repo_name-FixedVer.repo"
-  repo_kickstart="/etc/yum.repos.d/CentOS-$repo_name-Kickstart.repo"
-  repo_dist="/etc/yum.repos.d/dist/CentOS-$repo_name.repo"
+for repo in /etc/yum.repos.d/CentOS-*.repo; do
+  [[ ! -f $repo ]] && continue
 
-  if [[ ! -f $repo ]]; then
-    continue
-  fi
+  repo_basename=$(basename "$repo" .repo)
+  repo_name="$repo_basename##*-}"
+  [[ $repo_name == @(FixedVer|Kickstart) ]] && continue
+
+  repo_dist="/etc/yum.repos.d/dist/$repo_basename.repo"
+  repo_fixedver="/etc/yum.repos.d/$repo_basename-FixedVer.repo"
+  repo_kickstart="/etc/yum.repos.d/$repo_basename-Kickstart.repo"
+
   if [[ ! -f $repo_dist ]]; then
     cp -a "$repo" "$repo_dist"
   fi
