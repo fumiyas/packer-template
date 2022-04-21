@@ -31,7 +31,7 @@ for repo in /etc/yum.repos.d/CentOS-*.repo; do
   [[ ! -f $repo ]] && continue
 
   repo_basename=$(basename "$repo" .repo)
-  repo_name="$repo_basename##*-}"
+  repo_name="${repo_basename##*-}"
   [[ $repo_name == @(FixedVer|Kickstart) ]] && continue
 
   repo_dist="/etc/yum.repos.d/dist/$repo_basename.repo"
@@ -61,7 +61,7 @@ for repo in /etc/yum.repos.d/CentOS-*.repo; do
     >"$repo_fixedver" \
   ;
 
-  if [[ $repo_name == @(Base|AppStream) ]]; then
+  if [[ $repo_name == @(Base|BaseOS|AppStream) ]]; then
     sed \
       -e 's/^\[\(.*\)\]/[\L\1]/' \
       -e "s/^\[/[kickstart-/" \
