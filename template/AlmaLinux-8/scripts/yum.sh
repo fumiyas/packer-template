@@ -12,13 +12,16 @@ http://ftp.jaist.ac.jp/pub/Linux/almalinux/\$releasever/\\2\\3,\
 https://repo.almalinux.org/almalinux/\$releasever/\\2\\3\
 "
 fixed_baseurl="\
-https://repo.almalinux.org/vault/\$fixedver/\\2\\3\,\
-https://repo.almalinux.org/almalinux/\$fixedver/\\2\\3\
+http://ftp.iij.ad.jp/pub/linux/almalinux/\$fixedver/\\2\\3,\
+http://ftp.jaist.ac.jp/pub/Linux/almalinux/\$fixedver/\\2\\3,\
+https://repo.almalinux.org/almalinux/\$fixedver/\\2\\3,\
+https://repo.almalinux.org/vault/\$fixedver/\\2\\3\
 "
 kickstart_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/almalinux/\$fixedver/\\2/\$basearch/kickstart/,\
 http://ftp.jaist.ac.jp/pub/Linux/almalinux/\$fixedver/\\2/\$basearch/kickstart/,\
-https://repo.almalinux.org/almalinux/\$fixedver/\\2/\$basearch/kickstart/\
+https://repo.almalinux.org/almalinux/\$fixedver/\\2/\$basearch/kickstart/,\
+https://repo.almalinux.org/vault/\$fixedver/\\2/\$basearch/kickstart/\
 "
 
 echo "$el_ver" >"/etc/yum/vars/fixedver"
