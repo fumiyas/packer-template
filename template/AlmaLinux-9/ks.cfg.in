@@ -1,0 +1,131 @@
+logging --level=debug
+## RHEL
+#eula --agreed
+cdrom
+#url --url=https://repo.almalinux.org/almalinux/@os_version@/BaseOS/x86_64/kickstart/
+#url --url=https://repo.almalinux.org/vault/@os_version@/BaseOS/x86_64/kickstart/
+url --url=https://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/BaseOS/x86_64/kickstart/
+#repo --name=AppStream --baseurl=https://repo.almalinux.org/almalinux/@os_version@/AppStream/x86_64/kickstart/
+#repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/kickstart/
+repo --name=AppStream --baseurl=http://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/AppStream/x86_64/kickstart/
+reboot
+
+text
+skipx
+
+zerombr
+clearpart --all --initlabel
+autopart --noswap
+bootloader --location=mbr --append="plymouth.enable=0"
+firstboot --disabled
+
+lang --addsupport ja_JP en_US.UTF-8
+timezone --utc Asia/Tokyo
+keyboard jp
+
+rootpw root
+
+selinux --disabled
+
+network --bootproto=dhcp --hostname=localhost
+firewall --enabled --ssh
+services --enabled="sshd"
+
+## ================================================================================
+
+%packages
+
+@^minimal-environment
+sudo
+zsh
+bash-completion
+openssh-server
+openssh-clients
+
+## Unnecessary firmware packages
+-iwl*-firmware
+
+%end
+
+## ================================================================================
+
+%post --nochroot --interpreter=/bin/bash --log=/var/log/anaconda/ks.post.log
+root="$ANA_INSTALL_PATH"
+log="/var/log/anaconda/ks.post.verbose.log"
+trap_error_timelimit=3600
+
+if [[ -z $CHROOTED ]]; then
+  export CHROOTED=set
+  mkdir -p -m 0755 "$root${log%/*}"
+  exec > >(tee -a "$root$log" |sed 's/^/ks.cfg: %post: /' >>/dev/pts/0)
+  exec 2>&1
+  cp -p "$0" "$root$0"
+  exec chroot "$root" /bin/bash "$0" "$@"
+  exit $?
+fi
+
+set -e
+set -u
+umask 0022
+export LC_ALL=C
+
+trap_error() {
+  {
+    echo "ERROR: %post script in ks.cfg failed."
+    echo "ERROR: Sleeping $trap_error_timelimit seconds for you to debug..."
+    echo "ERROR: Script:    $root$0"
+    echo "ERROR: Exit code: $1"
+    echo "ERROR: Date:      $(date --iso-8601=minutes)"
+    echo "ERROR: Log:       $root$log"
+  } \
+  1>&2 \
+  ;
+
+  sleep "$trap_error_timelimit"
+
+  exit "$1"
+}
+trap 'rc=$?; set +x; trap_error "$rc"' EXIT
+
+echo "Startting %post script in ks.cfg"
+set -x
+
+packer_url=$(
+  sed \
+    -e 's/.* inst\.ks=//' \
+    -e 's/ .*//' \
+    -e 's|[^/]*$||' \
+    /proc/cmdline \
+ ;
+)
+
+mkdir -p /root/packer
+curl \
+  --output /root/packer/packer-build.tar.gz \
+  "$packer_url/packer-build.tar.gz" \
+;
+curl_http_code=$(
+  curl \
+    --output /root/packer/build.conf \
+    --write-out '%{http_code}' \
+    "$packer_url/build.conf" \
+  ;
+)
+if [[ $curl_http_code == 200 ]]; then
+  . /root/packer/build.conf
+else
+  rm -f /root/packer/build.conf
+fi
+
+if [[ ! -f /etc/ssh/sshd_config.dist ]]; then
+  cp -a /etc/ssh/sshd_config{,.dist}
+fi
+
+sed \
+  -e 's/^#*\(PermitRootLogin\).*/\1 yes/' \
+  </etc/ssh/sshd_config.dist \
+  >/etc/ssh/sshd_config \
+;
+
+trap - EXIT
+%end
