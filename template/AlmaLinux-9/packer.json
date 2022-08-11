@@ -1,6 +1,6 @@
 {
   "variables": {
-    "box_name": "AlmaLinux-8",
+    "box_name": "AlmaLinux-9",
     "headless": "false",
     "qemu_display": "gtk",
     "http_directory": ".",
@@ -8,8 +8,8 @@
     "os_type_vbox": "RedHat_64",
     "os_type_vmware": "redhat-64",
     "os_name": "AlmaLinux",
-    "os_version": "8.0",
-    "os_version_major": "8",
+    "os_version": "9.0",
+    "os_version_major": "9",
     "os_version_minor": "0",
     "os_arch": "x86_64",
     "iso_dir": "../../iso",
