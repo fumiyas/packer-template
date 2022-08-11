@@ -11,11 +11,11 @@ latest_baseurl="\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/"
 fixed_baseurl="\n\
   http://ftp.iij.ad.jp/pub/linux/centos/\$fixedver/\\2/\$basearch/\n\
-  http://ftp.iij.ad.jp/pub/linux/centos-vault/\$fixedver/\\2/\$basearch/\n\
+  http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/\$fixedver/\\2/\$basearch/\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$fixedver/\\2/\$basearch/\n\
-  http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$fixedver/\\2/\$basearch/\n\
+  http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/centos/\$fixedver/\\2/\$basearch/\n\
   https://vault.centos.org/\$fixedver/\\2/\$basearch/\n\
-  https://archive.kernel.org/centos-vault/\$fixedver/\\2/\$basearch/"
+  https://archive.kernel.org/centos-vault/centos/\$fixedver/\\2/\$basearch/"
 
 echo "$el_ver" >"/etc/yum/vars/fixedver"
 

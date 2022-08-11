@@ -11,9 +11,9 @@ latest_baseurl="\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/$el_ver_major/\\2/\$basearch/"
 vault_baseurl="\n\
   http://ftp.jaist.ac.jp/pub/Linux/CentOS/\$releasever/\\2/\$basearch/\n\
-  http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$releasever/\\2/\$basearch/\n\
+  http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/centos/\$releasever/\\2/\$basearch/\n\
   https://vault.centos.org/\$releasever/\\2/\$basearch/\n\
-  https://archive.kernel.org/centos-vault/\$releasever/\\2/\$basearch/"
+  https://archive.kernel.org/centos-vault/centos/\$releasever/\\2/\$basearch/"
 
 mkdir -p /etc/yum.repos.d/dist
 cp -a /etc/yum.repos.d/CentOS-*.repo /etc/yum.repos.d/dist
