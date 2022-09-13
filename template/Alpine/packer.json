@@ -58,14 +58,14 @@
       "guest_os_type": "{{user `os_type_vbox`}}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "vboxmanage": [
-	["modifyvm", "{{.Name}}", "--cpus", "{{user `vm_cpus`}}"],
-	["modifyvm", "{{.Name}}", "--memory", "{{user `vm_memory_size`}}"],
 	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
 	["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"]
       ],
+      "cpus": "{{user `vm_cpus`}}",
+      "memory": "{{user `vm_memory_size`}}",
       "disk_size": "{{user `vm_disk_size`}}",
       "hard_drive_interface": "sata",
       "vm_name": "{{user `vm_name`}}",
@@ -103,10 +103,10 @@
       "use_default_display": "true",
       "qemuargs": [
 	[ "-machine", "type=pc,accel=kvm:tcg" ],
-	[ "-display", "{{user `qemu_display`}}" ],
-	[ "-smp", "{{user `vm_cpus`}}" ],
-	[ "-m", "{{user `vm_memory_size`}}M" ]
+	[ "-display", "{{user `qemu_display`}}" ]
       ],
+      "cpus": "{{user `vm_cpus`}}",
+      "memory": "{{user `vm_memory_size`}}",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "disk_size": "{{user `vm_disk_size`}}",
