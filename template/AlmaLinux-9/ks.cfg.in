@@ -1,4 +1,3 @@
-logging --level=debug
 ## RHEL
 #eula --agreed
 cdrom
