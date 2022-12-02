@@ -58,6 +58,7 @@
       "guest_os_type": "{{user `os_type_vbox`}}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "vboxmanage": [
+	["modifyvm", "{{.Name}}", "--nested-hw-virt", "on"],
 	["modifyvm", "{{.Name}}", "--graphicscontroller", "VMSVGA"],
 	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
