@@ -8,8 +8,10 @@ if [[ ! -f /etc/default/grub.dist ]]; then
 fi
 
 sed \
-  -e 's/ rhgb\( \|"\)/\1/' \
-  -e 's/ quiet\( \|"\)/\1/' \
+  -E \
+  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])rhgb([" ])/\1\2/; s/  +/ /g; }' \
+  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])quiet([" ])/\1\2/; s/  +/ /g; }' \
+  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])crashkernel=\w+([" ])/\1\2/; s/  +/ /g; }' \
   </etc/default/grub.dist \
   >/etc/default/grub \
 ;
