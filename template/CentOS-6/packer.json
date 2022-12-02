@@ -74,6 +74,7 @@
 	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype4", "virtio"],
+	["modifyvm", "{{.Name}}", "--nat-localhostreachable1", "on"],
 	["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove"]
       ],
       "cpus": "{{user `vm_cpus`}}",
