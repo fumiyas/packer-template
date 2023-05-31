@@ -125,7 +125,7 @@
       "cpus": "{{user `vm_cpus`}}",
       "memory": "{{user `vm_memory_size`}}",
       "net_device": "virtio-net",
-      "disk_interface": "virtio",
+      "disk_interface": "virtio-scsi",
       "disk_size": "{{user `vm_disk_size`}}",
       "vm_name": "{{user `vm_name`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
