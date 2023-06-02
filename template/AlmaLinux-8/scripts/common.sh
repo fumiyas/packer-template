@@ -3,20 +3,6 @@
 set -u
 set -e
 
-if [[ ! -f /etc/default/grub.dist ]]; then
-  cp -a /etc/default/grub{,.dist}
-fi
-
-sed \
-  -E \
-  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])rhgb([" ])/\1\2/; s/  +/ /g; }' \
-  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])quiet([" ])/\1\2/; s/  +/ /g; }' \
-  -e '/^GRUB_CMDLINE_LINUX=/ { s/([" ])crashkernel=\w+([" ])/\1\2/; s/  +/ /g; }' \
-  </etc/default/grub.dist \
-  >/etc/default/grub \
-;
-grub2-mkconfig -o /boot/grub2/grub.cfg
-
 systemctl disable kdump.service
 
 ln -s ../x/xterm-256color /usr/share/terminfo/m/mlterm-256color
