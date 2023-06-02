@@ -1,13 +1,14 @@
 ## RHEL
 #eula --agreed
 cdrom
+
 #url --url=https://repo.almalinux.org/almalinux/@os_version@/BaseOS/x86_64/kickstart/
 #url --url=https://repo.almalinux.org/vault/@os_version@/BaseOS/x86_64/kickstart/
 url --url=https://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/BaseOS/x86_64/kickstart/
+
 #repo --name=AppStream --baseurl=https://repo.almalinux.org/almalinux/@os_version@/AppStream/x86_64/kickstart/
 #repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/kickstart/
 repo --name=AppStream --baseurl=http://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/AppStream/x86_64/kickstart/
-reboot
 
 text
 skipx
@@ -17,6 +18,7 @@ clearpart --all --initlabel
 autopart --noswap
 bootloader --location=mbr --append="plymouth.enable=0"
 firstboot --disabled
+reboot
 
 lang --addsupport ja_JP en_US.UTF-8
 timezone --utc Asia/Tokyo
