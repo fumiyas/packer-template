@@ -22,7 +22,12 @@ done
 ## DNF
 ## ======================================================================
 
-dnf remove linux-firmare --assumeyes
+dnf remove --assumeyes \
+  linux-firmare \
+  geolite2-country \
+  geolite2-city \
+;
+
 dnf clean all --enablerepo='*'
 
 ## Misc
