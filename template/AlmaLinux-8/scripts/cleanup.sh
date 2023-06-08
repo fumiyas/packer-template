@@ -19,10 +19,11 @@ for ifcfg in /etc/sysconfig/network-scripts/ifcfg-*; do
   mv "$ifcfg" /etc/sysconfig/network-scripts/dist/
 done
 
-## Yum
+## DNF
 ## ======================================================================
 
-yum clean all
+dnf remove linux-firmare --assumeyes
+dnf clean all --enablerepo='*'
 
 ## Misc
 ## ======================================================================
