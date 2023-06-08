@@ -23,7 +23,7 @@ done
 ## ======================================================================
 
 dnf remove --assumeyes \
-  linux-firmare \
+  linux-firmware \
   geolite2-country \
   geolite2-city \
 ;

@@ -22,7 +22,7 @@ done
 ## DNF
 ## ======================================================================
 
-dnf remove linux-firmare --assumeyes
+dnf remove linux-firmware --assumeyes
 dnf clean all --enablerepo='*'
 
 ## Misc

@@ -22,7 +22,7 @@ done
 ## Yum
 ## ======================================================================
 
-yum remove linux-firmare --assumeyes
+yum remove linux-firmware --assumeyes
 yum clean all --enablerepo='*'
 
 ## Misc
