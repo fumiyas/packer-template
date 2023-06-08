@@ -28,4 +28,5 @@ dnf clean all --enablerepo='*'
 ## Misc
 ## ======================================================================
 
+rm -f /var/lib/systemd/random-seed
 cp /dev/null /etc/machine-id
