@@ -44,8 +44,8 @@ bash-completion
 openssh-server
 openssh-clients
 
-## Unnecessary firmware packages
 -iwl*-firmware
+-microcode_ctl
 
 %end
 
