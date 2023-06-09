@@ -7,7 +7,7 @@ set -u
 set -e
 
 if ! rpm --query epel-release >/dev/null; then
-  yum install \
+  dnf install \
     --assumeyes \
     --disablerepo='*' \
     --enablerepo='fixedver-extras' \
