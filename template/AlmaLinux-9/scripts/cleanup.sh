@@ -22,7 +22,6 @@ done
 ## DNF
 ## ======================================================================
 
-dnf remove linux-firmware --assumeyes
 dnf clean all --enablerepo='*'
 
 ## Misc

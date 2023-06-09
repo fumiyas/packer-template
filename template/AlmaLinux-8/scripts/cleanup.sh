@@ -22,12 +22,6 @@ done
 ## DNF
 ## ======================================================================
 
-dnf remove --assumeyes \
-  linux-firmware \
-  geolite2-country \
-  geolite2-city \
-;
-
 dnf clean all --enablerepo='*'
 
 ## Misc

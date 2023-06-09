@@ -76,6 +76,20 @@ for repo in /etc/yum.repos.d/almalinux*.repo; do
   fi
 done
 
-## `lang --addsupport ja_JP` in ks.cfg does not install glibc-langpack-ja
-## (AlmaLinux 8.8 only?)
-dnf install --assumeyes glibc-langpack-ja
+## ======================================================================
+
+dnf install \
+  --assumeyes \
+  --setopt=install_weak_deps=False \
+  --disablerepo='*' \
+  --enablerepo='kickstart-baseos' \
+  --enablerepo='kickstart-appstream' \
+  langpacks-ja \
+  glibc-langpack-ja \
+;
+
+dnf remove \
+  --assumeyes \
+  linux-firmware \
+  glibc-all-langpacks \
+;
