@@ -40,6 +40,8 @@ services --enabled="sshd"
 sudo
 zsh
 bash-completion
+tar
+openssl
 openssh-server
 openssh-clients
 
