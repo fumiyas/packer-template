@@ -30,7 +30,7 @@ services --enabled="sshd"
 
 ## ================================================================================
 
-%packages
+%packages --excludeWeakdeps
 
 @^minimal-environment
 sudo
@@ -41,6 +41,7 @@ openssh-clients
 
 ## Unnecessary firmware packages
 -iwl*-firmware
+-microcode_ctl
 
 %end
 

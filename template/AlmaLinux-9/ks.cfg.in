@@ -34,7 +34,7 @@ services --enabled="sshd"
 
 ## ================================================================================
 
-%packages
+%packages --exclude-weakdeps
 
 @^minimal-environment
 sudo

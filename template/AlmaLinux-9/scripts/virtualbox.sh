@@ -9,8 +9,9 @@ vbox_version=$(cat ~root/.vbox_version)
 rpm_pkglist=$(mktemp /tmp/${0##*/}.XXXXXXXX)
 rpm -qa --queryformat '%{name}\n' |sort >"$rpm_pkglist"
 
-yum install \
+dnf install \
   --assumeyes \
+  --setopt=install_weak_deps=False \
   --disablerepo='*' \
   --enablerepo='kickstart-baseos' \
   --enablerepo='kickstart-appstream' \
@@ -33,6 +34,6 @@ if [[ -s $rpm_pkglist ]]; then
   |sort \
   |diff "$rpm_pkglist" - \
   |sed -n 's/^> //p' \
-  |xargs rpm -e \
+  |xargs dnf remove \
   ;
 fi
