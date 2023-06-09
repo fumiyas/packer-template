@@ -34,6 +34,6 @@ if [[ -s $rpm_pkglist ]]; then
   |sort \
   |diff "$rpm_pkglist" - \
   |sed -n 's/^> //p' \
-  |xargs dnf remove \
+  |xargs dnf remove --assumeyes \
   ;
 fi
