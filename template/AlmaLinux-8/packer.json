@@ -33,7 +33,7 @@
       "override": {
 	"virtualbox-iso": {
 	  "scripts": [
-	    "scripts/yum.sh",
+	    "scripts/dnf.sh",
 	    "scripts/epel.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
@@ -45,7 +45,7 @@
 	},
 	"qemu": {
 	  "scripts": [
-	    "scripts/yum.sh",
+	    "scripts/dnf.sh",
 	    "scripts/epel.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
@@ -56,7 +56,7 @@
 	},
 	"vmware-iso": {
 	  "scripts": [
-	    "scripts/yum.sh",
+	    "scripts/dnf.sh",
 	    "scripts/epel.sh",
 	    "scripts/ssh.sh",
 	    "scripts/vagrant.sh",
