@@ -58,7 +58,7 @@ Update to the latest development version:
 
 ```console
 $ cd ${GOPATH-$HOME/go}/src/github.com/hashicorp/packer
-$ git checkout master
+$ git checkout main
 $ git pull
 $ make dev
 ...
