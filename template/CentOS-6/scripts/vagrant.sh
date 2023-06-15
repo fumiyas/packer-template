@@ -21,5 +21,4 @@ curl \
   --output "$vagrant_home/.ssh/authorized_keys" \
   https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
 ;
-chown -hR vagrant: "$vagrant_home/.ssh"
-
+chown -R vagrant: "$vagrant_home/.ssh"

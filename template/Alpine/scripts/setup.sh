@@ -37,7 +37,7 @@ wget \
   https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub \
 || exit $? \
 ;
-chown -hR vagrant: "$vagrant_home/.ssh" || exit $?
+chown -R vagrant: "$vagrant_home/.ssh" || exit $?
 
 ## ======================================================================
 
