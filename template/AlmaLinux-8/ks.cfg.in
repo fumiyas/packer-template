@@ -6,10 +6,10 @@ cdrom
 #url --url=https://repo.almalinux.org/almalinux/@os_version@/BaseOS/x86_64/kickstart/
 url --url=https://repo.almalinux.org/vault/@os_version@/BaseOS/x86_64/kickstart/
 #url --url=https://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/BaseOS/x86_64/kickstart/
+
 #repo --name=AppStream --baseurl=https://repo.almalinux.org/almalinux/@os_version@/AppStream/x86_64/kickstart/
 repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/kickstart/
 #repo --name=AppStream --baseurl=http://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/AppStream/x86_64/kickstart/
-reboot
 
 text
 skipx
