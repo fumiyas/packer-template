@@ -7,20 +7,20 @@ umask 0022
 el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 
 latest_baseurl="\
-http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/\$contentdir/\$releasever/\\2/\$basearch/\\3/,\
-http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/centos/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
+http://ftp.iij.ad.jp/pub/linux/centos-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/,\
+http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
 "
 fixed_baseurl="\
-http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
-http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
+http://ftp.iij.ad.jp/pub/linux/centos-vault/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
+http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
 https://vault.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
-https://archive.kernel.org/centos-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/\\3/\
+https://archive.kernel.org/centos-vault/\$contentdir/\$fixedver/\\2/\$basearch/\\3/\
 "
 kickstart_baseurl="\
-http://ftp.iij.ad.jp/pub/linux/centos-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
-http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
+http://ftp.iij.ad.jp/pub/linux/centos-vault/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
+http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
 https://vault.centos.org/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/,\
-https://archive.kernel.org/centos-vault/centos/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/\
+https://archive.kernel.org/centos-vault/\$contentdir/\$fixedver/\\2/\$basearch/kickstart/\
 "
 
 echo "$el_ver" >"/etc/yum/vars/fixedver"
