@@ -8,7 +8,9 @@ el_ver=$(sed 's/ *(.*//;s/.* //' /etc/redhat-release)
 
 latest_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/centos-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/,\
-http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
+http://ftp.jaist.ac.jp/pub/Linux/CentOS-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/,\
+https://vault.centos.org/\$contentdir/\$releasever/\\2/\$basearch/\\3/,\
+https://archive.kernel.org/centos-vault/\$contentdir/\$releasever/\\2/\$basearch/\\3/\
 "
 fixed_baseurl="\
 http://ftp.iij.ad.jp/pub/linux/centos-vault/\$contentdir/\$fixedver/\\2/\$basearch/\\3/,\
