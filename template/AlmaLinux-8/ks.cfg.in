@@ -3,13 +3,19 @@ logging --level=debug
 #eula --agreed
 cdrom
 
+## Original repos (the latest minor version only)
 #url --url=https://repo.almalinux.org/almalinux/@os_version@/BaseOS/x86_64/kickstart/
-url --url=https://repo.almalinux.org/vault/@os_version@/BaseOS/x86_64/kickstart/
-#url --url=https://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/BaseOS/x86_64/kickstart/
-
 #repo --name=AppStream --baseurl=https://repo.almalinux.org/almalinux/@os_version@/AppStream/x86_64/kickstart/
-repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/kickstart/
+
+## Mirror repos in Japan (the latest minor version only)
+#url --url=https://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/BaseOS/x86_64/kickstart/
 #repo --name=AppStream --baseurl=http://ftp.iij.ad.jp/pub/linux/almalinux/@os_version@/AppStream/x86_64/kickstart/
+
+## Original valut repos (past minor versions)
+url --url=https://repo.almalinux.org/vault/@os_version@/BaseOS/x86_64/kickstart/
+repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/kickstart/
+## AlmaLinux 8.3 kickstart does not exist...
+#repo --name=AppStream --baseurl=https://repo.almalinux.org/vault/@os_version@/AppStream/x86_64/os/
 
 text
 skipx
