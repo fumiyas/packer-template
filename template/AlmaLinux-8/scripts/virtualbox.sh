@@ -17,7 +17,7 @@ dnf install \
   --enablerepo='kickstart-appstream' \
   tar \
   bzip2 \
-  kernel-devel \
+  kernel-devel-$(uname -r) \
   elfutils-libelf-devel \
   gcc \
   perl \

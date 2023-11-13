@@ -14,7 +14,7 @@ yum install \
   --disablerepo='*' \
   --enablerepo='base' \
   bzip2 \
-  kernel-devel \
+  kernel-devel-$(uname -r) \
   make \
   gcc \
   perl \
