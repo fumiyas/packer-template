@@ -12,7 +12,7 @@ skipx
 zerombr
 clearpart --all --initlabel
 autopart --noswap
-bootloader --location=mbr --append="plymouth.enable=0"
+bootloader --location=mbr --append="consoleblank=0 plymouth.enable=0"
 firstboot --disabled
 reboot
 
