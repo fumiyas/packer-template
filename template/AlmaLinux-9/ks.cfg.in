@@ -124,14 +124,7 @@ else
   rm -f /root/packer/build.conf
 fi
 
-if [[ ! -f /etc/ssh/sshd_config.dist ]]; then
-  cp -a /etc/ssh/sshd_config{,.dist}
-fi
-sed \
-  -e 's/^#*\(PermitRootLogin\).*/\1 yes/' \
-  </etc/ssh/sshd_config.dist \
-  >/etc/ssh/sshd_config \
-;
+echo 'PermitRootLogin yes' >/etc/ssh/sshd_config.d/00-packer.conf
 
 if [[ ! -f /etc/default/grub.dist ]]; then
   cp -a /etc/default/grub{,.dist}
