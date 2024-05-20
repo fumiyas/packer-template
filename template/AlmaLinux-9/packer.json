@@ -85,6 +85,7 @@
       "vboxmanage": [
 	["modifyvm", "{{.Name}}", "--nested-hw-virt", "on"],
 	["modifyvm", "{{.Name}}", "--graphicscontroller", "VMSVGA"],
+	["modifyvm", "{{.Name}}", "--vram", "8"],
 	["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype2", "virtio"],
 	["modifyvm", "{{.Name}}", "--nictype3", "virtio"],
