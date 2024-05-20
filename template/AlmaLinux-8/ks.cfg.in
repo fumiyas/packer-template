@@ -31,7 +31,6 @@ lang en_US.UTF-8
 timezone --utc Asia/Tokyo
 keyboard jp106
 
-## Deleted in %post script
 rootpw root
 
 selinux --disabled
@@ -140,8 +139,6 @@ sed \
   >/etc/default/grub \
 ;
 grub2-mkconfig -o /boot/grub2/grub.cfg
-
-passwd --delete root
 
 trap - EXIT
 %end
