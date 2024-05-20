@@ -10,7 +10,6 @@ fi
 
 sed \
   -e 's/^#*\(PermitRootLogin\).*/\1 prohibit-password/' \
-  -e 's/^#*\(UseDNS\).*/\1 no/' \
   </etc/ssh/sshd_config.dist \
   >/etc/ssh/sshd_config \
 ;
