@@ -78,6 +78,14 @@ done
 
 ## ======================================================================
 
+## AlmaLinux OS - Forever-Free Enterprise-Grade Operating System
+## https://almalinux.org/blog/2023-12-20-almalinux-8-key-update/
+if ! rpm -q gpg-pubkey-ced7258b-6525146f; then
+  rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux
+fi
+
+## ======================================================================
+
 dnf install \
   --assumeyes \
   --setopt=install_weak_deps=False \
