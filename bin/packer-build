@@ -41,9 +41,9 @@ iso_dir="$base_dir/iso"
 conf_default="$base_dir/etc/default.conf"
 conf_local="$base_dir/etc/local.conf"
 conf_local_dir="$base_dir/etc/local.conf.d"
+box_name="MUST-BE-DEFINED-IN-CONFFILE"
+box_template="MUST-BE-DEFINED-IN-CONFFILE"
 box_url_prefix="file://$dist_dir/"
-qemu_system="qemu-system-x86_64"
-
 conf="$1"; shift
 
 ## ======================================================================
@@ -90,7 +90,7 @@ vars=(
 
 sed -n 's/^\([a-z][a-z_0-9]*\)=.*/\1/p' "${confs[@]}" \
 |sort -u \
-|while read var_name; do
+|while read -r var_name; do
   [[ $var_name == "box_template" ]] && continue
   eval "vars[$var_name]=\"\$$var_name\""
 done
@@ -130,7 +130,7 @@ sed '/^ *\/\/.*/d' packer.json.dist >packer.json || exit $?
     echo "$var_name"
   done \
   |sort \
-  |while read var_name; do
+  |while read -r var_name; do
     var="${vars[$var_name]//\"/\\\"}"
     var="${var//$tab/\\t}"
     var="${var//$lf/\\n}"
@@ -187,7 +187,6 @@ tar czf "$packer_build_name.tar.gz" "$packer_build_name" || exit $?
 
 ## ----------------------------------------------------------------------
 
-boxes_json=""
 for box in *.box; do
   [[ -f $box ]] || continue
   url="$box_url_prefix$box_name/$box_version/$box"
@@ -221,9 +220,9 @@ done
 mkdir -p "$box_dist_ver_dir" || exit $?
 
 mv \
-  *.json \
-  *.box \
-  "$packer_build_name.tar.gz" \
+  ./*.json \
+  ./*.box \
+  ./"$packer_build_name.tar.gz" \
   "$box_dist_ver_dir/" \
 || exit $? \
 ;
