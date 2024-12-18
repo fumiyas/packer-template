@@ -3,7 +3,7 @@
     "box_name": "CentOS-6",
     "headless": "false",
     "http_directory": ".",
-    "boot_wait": "10s",
+    "boot_wait": "5s",
     "os_type_vbox": "RedHat_64",
     "os_type_vmware": "centos-64",
     "os_name": "CentOS",
