@@ -120,6 +120,7 @@
       "headless": "{{user `headless`}}",
       "use_default_display": "true",
       "qemuargs": [
+	[ "-cpu", "max" ],
 	[ "-machine", "type=q35,accel=kvm:tcg" ],
 	[ "-display", "{{user `qemu_display`}}" ]
       ],
